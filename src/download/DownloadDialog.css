@@ -1,0 +1,97 @@
+.download-dialog {
+  color: var(--text);
+  text-align: left;
+  background: var(--page);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px;
+  width: 500px;
+  max-width: calc(100vw - 64px);
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.download-dialog::backdrop {
+  background: #0005;
+}
+.download-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 20px;
+}
+.download-heading img {
+  display: block;
+  flex-shrink: 0;
+}
+.download-dialog h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 550;
+  letter-spacing: -0.5px;
+}
+.download-dialog p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+.dialog-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  height: 44px;
+  width: 44px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--muted);
+}
+.dialog-close:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.dialog-close:active {
+  background: #e8e8ed;
+}
+.download-platforms {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+.download-platform {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  height: 72px;
+}
+.download-platform + .download-platform {
+  border-top: 1px solid #e8e8ed;
+}
+.platform-icon {
+  color: #515154;
+}
+.platform-name {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+.platform-download {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid #dedee3;
+  border-radius: 6px;
+  background: #f5f5f7;
+  color: #6e6e73;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.platform-download:disabled {
+  opacity: 1;
+}

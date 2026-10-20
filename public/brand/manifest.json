@@ -1,0 +1,31 @@
+{
+  "name": "Meridian striped wordmark",
+  "date": "2026-10-19",
+  "text": "MERIDIAN",
+  "reference": "https://www.ibm.com/design/language/ibm-logos/8-bar/",
+  "adoptedPrinciples": [
+    "slab-serif structure",
+    "horizontal rhythm",
+    "positive/reversed optical weight correction"
+  ],
+  "referenceBoundary": "IBM logo, proprietary outlines and brand assets not incorporated. Six cuts adapted for a longer Meridian word at small desktop sizes.",
+  "font": {
+    "name": "Roboto Slab",
+    "weight": 900,
+    "author": "Christian Robertson / The Roboto Slab Project Authors",
+    "source": "https://raw.githubusercontent.com/googlefonts/robotoslab/67af3ce9c4ca574419e1295b6165a2eeee112e6e/fonts/variable/RobotoSlab%5Bwght%5D.ttf",
+    "revision": "67af3ce9c4ca574419e1295b6165a2eeee112e6e",
+    "sha256": "786ae192477447d33c6672c3055fba7cbfe45184c9a79e77a14f15716ca05b16",
+    "license": "Apache-2.0",
+    "licenseFile": "public/licenses/roboto-slab-LICENSE.txt"
+  },
+  "runtime": "Local SVG paths; no webfont, no remote request, no added application dependency",
+  "exports": [
+    {
+      "path": "public/brand/meridian-wordmark-positive.svg",
+      "sha256": "2d03dfa6037654d76b67f52a6fe2d5882a26abd615d91518522f571fbdb1cead",
+      "surface": "positive"
+    }
+  ],
+  "generation": "Roboto Slab outlines adapted for Meridian: spacing, normalized geometry and six-cut composition."
+}

@@ -1,0 +1,394 @@
+{
+  "zh": {
+    "locale": "zh-CN",
+    "meta": {
+      "title": "Meridian — AI 开发工作空间",
+      "description": "Meridian 将项目、代码库与 AI 协作整合在一个桌面工作空间中。创建项目、编写代码、检查变更，让工作有序接续。"
+    },
+    "hero": {
+      "title": "AI 开发工作空间",
+      "paragraph": "以 Rust 桌面架构为底座，为项目上下文与持续协作设计。\n从目标、代码到变更检查，看完整开发过程如何衔接。",
+      "headline": "为完整项目而构建",
+      "action": "看看如何工作"
+    },
+    "download": {
+      "title": "下载 Meridian",
+      "description": "安装包暂未开放下载。",
+      "unavailable": "暂未开放下载",
+      "close": "关闭下载窗口",
+      "platforms": [
+        {
+          "id": "windows",
+          "name": "Windows",
+          "status": "unavailable"
+        },
+        {
+          "id": "macos",
+          "name": "macOS",
+          "status": "unavailable"
+        },
+        {
+          "id": "android",
+          "name": "Android",
+          "status": "unavailable"
+        },
+        {
+          "id": "ios",
+          "name": "iOS",
+          "status": "unavailable"
+        }
+      ],
+      "trigger": "下载",
+      "platformsLabel": "下载平台"
+    },
+    "language": {
+      "label": "中文",
+      "switchLabel": "切换为英文"
+    },
+    "story": {
+      "eyebrow": "为开发而组织",
+      "title": "从一个想法，\n到一份有据可查的成果",
+      "description": "Meridian 将项目、代码库与 AI 协作整合在一个桌面工作空间中。代码、任务与上下文彼此连接，工作可以从上次停下的地方继续。",
+      "chapters": [
+        {
+          "id": "story-project",
+          "label": "项目与代码库",
+          "title": "先有项目，再展开工作。",
+          "description": "创建或导入项目，集中管理文件、分支与变更。"
+        },
+        {
+          "id": "story-code",
+          "label": "代码与协作",
+          "title": "目标一致，分工清晰。",
+          "description": "围绕同一目标分工执行，保留上下文，让开发与检查有序衔接。"
+        },
+        {
+          "id": "story-review",
+          "label": "检查与交付",
+          "title": "看清变更，再交付。",
+          "description": "对照代码差异与检查结果，修正问题，保留交付依据。"
+        }
+      ],
+      "demo": {
+        "label": "示例项目 · 功能演示",
+        "files": "代码库",
+        "history": "版本记录",
+        "create": "建立 Notes 项目",
+        "created": "项目已建立 · 本地示例",
+        "commit": "初始化代码库",
+        "goal": "添加标签筛选",
+        "developer": "开发 Agent",
+        "reviewer": "检查 Agent",
+        "writing": "补充筛选逻辑",
+        "handoff": "已交接 · 变更与检查要求",
+        "review": "检查标签筛选",
+        "issue": "发现遗漏：选择 all 应显示全部笔记。",
+        "fix": "已修正：保留全部笔记。",
+        "pending": "等待检查",
+        "checks": "全部 / 工作标签 / 空结果",
+        "passed": "3 项示例检查通过",
+        "delivery": "版本记录 · 标签筛选已交付",
+        "boundary": "此演示仅使用本地示例，不读取真实项目。"
+      },
+      "prototype": {
+        "label": "概念示例",
+        "scenes": [
+          {
+            "document": "项目要求",
+            "title": "为笔记，加入标签筛选",
+            "artifact": "项目代码库"
+          },
+          {
+            "document": "项目任务",
+            "title": "工作交接，带上上下文",
+            "artifact": "成果片段"
+          },
+          {
+            "document": "退修记录",
+            "title": "发现遗漏，修正后再检查",
+            "artifact": "检查结果"
+          }
+        ],
+        "requirements": ["全部：保留每一条笔记", "工作：只显示工作标签", "无匹配：显示空结果"],
+        "preparing": "建立项目与代码库",
+        "ready": "项目已建立，要求与源码一并保留",
+        "executor": "执行员工",
+        "implementation": "实现筛选，补充变更",
+        "verifier": "独立验证员工",
+        "preparingHandoff": "准备变更与交接材料",
+        "handedOff": "目标、变更、检查要求已送达",
+        "waiting": "待检查",
+        "received": "材料已送达，等待接续",
+        "context": "交接保留任务目标、成果版本与待检查项",
+        "finding": "选择“全部”时，已有笔记没有显示",
+        "corrected": "补齐“全部”条件，返回独立检查",
+        "rechecking": "修正后重新核对检查项",
+        "verified": "检查完成，保留对应版本与记录",
+        "repository": "项目文件",
+        "projectBrief": "项目要求",
+        "source": "项目源码",
+        "criteria": "检查用例",
+        "initialVersion": "初始化代码库",
+        "feature": "标签筛选",
+        "all": "全部",
+        "work": "工作",
+        "reading": "阅读",
+        "noteTitle": "下一版，从这里开始",
+        "noteExcerpt": "记录产品想法，梳理下一步值得投入的方向。",
+        "change": "随成果一起交接",
+        "checks": ["全部笔记可见", "工作标签筛选", "无匹配时为空"],
+        "failed": "发现遗漏",
+        "passed": "通过",
+        "versionPending": "检查完成后保留对应版本",
+        "versionSaved": "已保留版本与检查记录"
+      }
+    },
+    "principles": {
+      "title": "为持续开发设计\n让执行有据可查",
+      "description": "以 Rust 构建坚实底座，以原生桌面承载专注体验。Meridian 围绕项目连接工具与工作记录，让每一个值得投入的想法，都有持续向前的空间。",
+      "technologiesLabel": "技术基础",
+      "repositoriesLabel": "开源参考",
+      "referenceRoles": {
+        "clap": "Rust 命令行解析",
+        "execd": "命令执行 · 流式输出",
+        "openhands": "执行事件 · 停止竞态",
+        "smolvm": "本机 microVM 底座",
+        "libkrun": "进程内虚拟化运行时"
+      }
+    },
+    "company": {
+      "name": "无厚理则科技有限公司",
+      "alias": "Mou-Hau Logic",
+      "informationLabel": "联系与信息",
+      "contactLabel": "商务联系",
+      "addressLabel": "公司地址",
+      "pending": "待公布",
+      "privacy": "隐私政策 · 待发布",
+      "terms": "使用条款 · 待发布"
+    }
+  },
+  "en": {
+    "locale": "en",
+    "meta": {
+      "title": "Meridian — AI Development Workspace",
+      "description": "Meridian brings projects, repositories and AI collaboration into one desktop workspace. Create projects, write code and review changes with context intact."
+    },
+    "hero": {
+      "title": "AI Development Workspace",
+      "paragraph": "A Rust-based desktop foundation, designed for project context and continuous collaboration.\nExplore how goals, code changes and review connect across one project.",
+      "headline": "Built around your entire project",
+      "action": "See how it works"
+    },
+    "download": {
+      "title": "Download Meridian",
+      "description": "Installers are not available yet.",
+      "unavailable": "Not available yet",
+      "close": "Close download window",
+      "platforms": [
+        {
+          "id": "windows",
+          "name": "Windows",
+          "status": "unavailable"
+        },
+        {
+          "id": "macos",
+          "name": "macOS",
+          "status": "unavailable"
+        },
+        {
+          "id": "android",
+          "name": "Android",
+          "status": "unavailable"
+        },
+        {
+          "id": "ios",
+          "name": "iOS",
+          "status": "unavailable"
+        }
+      ],
+      "trigger": "Download",
+      "platformsLabel": "Download platforms"
+    },
+    "language": {
+      "label": "EN",
+      "switchLabel": "Switch to Chinese"
+    },
+    "story": {
+      "eyebrow": "Built around development",
+      "title": "From an idea\nto work you can review",
+      "description": "Meridian brings projects, repositories and AI collaboration into one desktop workspace. Code, tasks and context stay connected, so work can pick up where you left off.",
+      "chapters": [
+        {
+          "id": "story-project",
+          "label": "Projects & repositories",
+          "title": "A project. A place to begin.",
+          "description": "Create or import a project. Keep files, branches and changes together."
+        },
+        {
+          "id": "story-code",
+          "label": "Code & collaboration",
+          "title": "Shared context. Focused roles.",
+          "description": "Work toward one goal with clear roles and shared context, connecting development with review."
+        },
+        {
+          "id": "story-review",
+          "label": "Review & delivery",
+          "title": "Review the change. Keep the evidence.",
+          "description": "Compare the diff with check results, resolve issues and retain a record of delivery."
+        }
+      ],
+      "demo": {
+        "label": "Example project · Feature demonstration",
+        "files": "Repository",
+        "history": "Version history",
+        "create": "Create the Notes project",
+        "created": "Project created · Local example",
+        "commit": "Initialize repository",
+        "goal": "Add tag filtering",
+        "developer": "Development agent",
+        "reviewer": "Review agent",
+        "writing": "Implementing tag filtering",
+        "handoff": "Handed off · Change and review context",
+        "review": "Review tag filtering",
+        "issue": "Missing case: selecting all should show every note.",
+        "fix": "Corrected: keep every note for all.",
+        "pending": "Awaiting review",
+        "checks": "All / Work tag / Empty result",
+        "passed": "3 example checks passed",
+        "delivery": "Version recorded · Tag filtering delivered",
+        "boundary": "This demonstration uses local fixtures and does not access real projects."
+      },
+      "prototype": {
+        "label": "Concept example",
+        "scenes": [
+          {
+            "document": "Project brief",
+            "title": "Give notes a way to filter",
+            "artifact": "Project repository"
+          },
+          {
+            "document": "Project task",
+            "title": "Hand off the work and context",
+            "artifact": "Result excerpt"
+          },
+          {
+            "document": "Revision record",
+            "title": "Find the gap. Fix it. Check again.",
+            "artifact": "Review results"
+          }
+        ],
+        "requirements": [
+          "All: keep every note",
+          "Work: match the work tag",
+          "No match: return an empty result"
+        ],
+        "preparing": "Creating project and repository",
+        "ready": "Project ready. Brief and source kept together",
+        "executor": "Implementer",
+        "implementation": "Build the filter and record changes",
+        "verifier": "Independent reviewer",
+        "preparingHandoff": "Preparing changes and context",
+        "handedOff": "Goal, changes and review criteria delivered",
+        "waiting": "Pending",
+        "received": "Delivered. Awaiting review",
+        "context": "The handoff keeps the goal, artifact revision and review criteria",
+        "finding": "Selecting All hides existing notes",
+        "corrected": "All condition restored. Ready for another review",
+        "rechecking": "Checking the revision against the criteria",
+        "verified": "Review complete. Revision and results kept together",
+        "repository": "Project files",
+        "projectBrief": "Project brief",
+        "source": "Project source",
+        "criteria": "Review cases",
+        "initialVersion": "Repository initialized",
+        "feature": "Filter by tag",
+        "all": "All",
+        "work": "Work",
+        "reading": "Reading",
+        "noteTitle": "The next version starts here",
+        "noteExcerpt": "Capture product ideas and decide what deserves attention next.",
+        "change": "Included in the handoff",
+        "checks": ["All notes remain visible", "Filter by work tag", "No match returns empty"],
+        "failed": "Issue found",
+        "passed": "Passed",
+        "versionPending": "Keep the revision when review is complete",
+        "versionSaved": "Revision and review record kept"
+      }
+    },
+    "principles": {
+      "title": "Built for ongoing work\nTraceable by design",
+      "description": "A Rust-powered foundation, shaped into a focused desktop experience. Meridian brings tools and work records together around your project, giving ideas the space to grow into lasting work.",
+      "technologiesLabel": "Technology foundation",
+      "repositoriesLabel": "Open-source references",
+      "referenceRoles": {
+        "clap": "Rust command-line parsing",
+        "execd": "Execution & streaming output",
+        "openhands": "Events & cancellation races",
+        "smolvm": "Local microVM foundation",
+        "libkrun": "In-process virtualization"
+      }
+    },
+    "company": {
+      "name": "Mou-Hau Logic",
+      "alias": "无厚理则科技有限公司",
+      "informationLabel": "Contact & information",
+      "contactLabel": "Business inquiries",
+      "addressLabel": "Company address",
+      "pending": "To be announced",
+      "privacy": "Privacy policy · Coming soon",
+      "terms": "Terms of use · Coming soon"
+    }
+  },
+  "technologyStack": [
+    {
+      "id": "rust",
+      "name": "Rust",
+      "icon": "tech-rust.svg"
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "icon": "tech-react.svg"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "icon": "tech-typescript.svg"
+    },
+    {
+      "id": "vite",
+      "name": "Vite",
+      "icon": "tech-vite.svg"
+    }
+  ],
+  "referenceRepositories": [
+    {
+      "id": "clap",
+      "name": "clap",
+      "url": "https://github.com/clap-rs/clap",
+      "icon": "reference-clap.png"
+    },
+    {
+      "id": "execd",
+      "name": "execd",
+      "url": "https://github.com/opensandbox-group/OpenSandbox/tree/main/components/execd",
+      "icon": "reference-opensandbox.svg"
+    },
+    {
+      "id": "libkrun",
+      "name": "libkrun",
+      "url": "https://github.com/containers/libkrun",
+      "icon": "reference-libkrun.png"
+    },
+    {
+      "id": "openhands",
+      "name": "OpenHands",
+      "url": "https://github.com/OpenHands/software-agent-sdk"
+    },
+    {
+      "id": "smolvm",
+      "name": "smolvm",
+      "url": "https://github.com/smol-machines/smolvm"
+    }
+  ]
+}

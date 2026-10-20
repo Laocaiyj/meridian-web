@@ -1,0 +1,9 @@
+Platform brand icons
+
+Font Awesome Free 6.7.2 by Fonticons, Inc.
+Source: https://github.com/FortAwesome/Font-Awesome/tree/6.7.2/svgs/brands
+SVG icons: CC BY 4.0. See font-awesome-free-LICENSE.txt.
+
+Used without outline modifications. Display sizing is controlled by CSS.
+Windows identifies Windows; Apple identifies macOS and iOS; Android identifies Android.
+All brand icons are trademarks of their respective owners. Their use does not indicate endorsement. No store availability or download eligibility is implied.

@@ -1,0 +1,11 @@
+Meridian wordmark outlines
+Copyright 2018 The Roboto Slab Project Authors (https://github.com/googlefonts/robotoslab).
+Licensed under Apache License 2.0; see roboto-slab-LICENSE.txt.
+
+Modified for Meridian: selected weight900, MERIDIAN lettering, tracking, outline conversion, normalized coordinates, horizontal-cut composition and positive/reversed optical correction.
+Upstream revision: 67af3ce9c4ca574419e1295b6165a2eeee112e6e.
+The wordmark does not contain IBM logo artwork or proprietary letter outlines.
+
+Website copy: the original positive SVG is distributed unchanged at public/brand/meridian-wordmark-positive.svg. Its font source and asset fingerprint are recorded in public/brand/manifest.json.
+
+Earlier website revisions used a decorative M crop of this wordmark. That unused adaptation was removed during the authorized website cleanup; it is not distributed. The current procedural quartz fan is original website code and does not derive from third-party logo artwork.
