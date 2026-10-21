@@ -77,3 +77,26 @@
   flex-wrap: wrap;
   gap: 12px 24px;
 }
+
+@media (max-width: 900px) {
+  .company-footer {
+    padding: 40px 0 24px;
+  }
+  .company-inner {
+    width: calc(100% - 40px);
+  }
+  .company-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .company-footer h2 {
+    font-size: 22px;
+  }
+  .company-information dl {
+    gap: 20px;
+  }
+  .company-legal {
+    margin-top: 32px;
+    gap: 16px;
+  }
+}

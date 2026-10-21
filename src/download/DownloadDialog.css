@@ -95,3 +95,32 @@
 .platform-download:disabled {
   opacity: 1;
 }
+
+@media (max-width: 900px) {
+  .download-dialog {
+    width: 440px;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100svh - 32px);
+    padding: 32px 20px 16px;
+  }
+  .download-heading {
+    gap: 10px;
+    padding-right: 10px;
+  }
+  .download-heading img {
+    width: 32px;
+    height: 32px;
+  }
+  .download-dialog h2 {
+    font-size: 21px;
+    line-height: 26px;
+  }
+  .download-platform {
+    gap: 10px;
+    height: 68px;
+  }
+  .platform-download {
+    min-height: 44px;
+    padding: 7px 8px;
+  }
+}

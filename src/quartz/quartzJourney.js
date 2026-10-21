@@ -63,15 +63,31 @@ export function createQuartzJourney({ hero, boundary, artwork, layer, canvas, re
             (frame.scroll - header.height * 0.1) / Math.max(1, frame.handoff - header.height * 0.1),
           )
         : 1;
-      const progress = 0.5 * travel + 0.5 * frame.progress;
       const section = boundary?.getBoundingClientRect();
+      // Phone hinges follow physical document travel, independently of chapter selection.
+      const storyProgress = frame.narrow
+        ? clamp(
+            (frame.scroll - frame.handoff) /
+              Math.max(
+                1,
+                (section?.bottom ?? window.innerHeight) +
+                  frame.scroll -
+                  frame.handoff -
+                  (window.innerHeight + bounds.height) * 0.5,
+              ),
+          )
+        : frame.progress;
+      // Both phone actors keep unfolding through all three scroll-driven documents.
+      const progress = frame.narrow
+        ? 0.7 * travel + 0.3 * storyProgress
+        : 0.5 * travel + 0.5 * storyProgress;
       const bottom = section?.bottom ?? Infinity;
       const layerTop = Math.min((window.innerHeight - bounds.height) / 2, bottom - bounds.height);
       const exitShift = layerTop - (window.innerHeight - bounds.height) / 2;
-      const accentTop = -220 + exitShift;
-      const accentProgress = clamp(
-        0.4 * clamp(-section?.top / window.innerHeight) + 0.6 * frame.progress,
-      );
+      const accentTop = (frame.narrow ? -100 : -220) + exitShift;
+      const accentProgress = frame.narrow
+        ? clamp(0.65 * travel + 0.35 * storyProgress)
+        : clamp(0.4 * clamp(-section?.top / window.innerHeight) + 0.6 * storyProgress);
       const accentVisible = section?.top <= 0 && bottom > 0;
       layer.hidden = bottom <= 0 || (!active && !reduced && !frame.static);
       // Fixed throughout unfolding; the completed actor leaves with its chapter.
@@ -92,7 +108,7 @@ export function createQuartzJourney({ hero, boundary, artwork, layer, canvas, re
         accentY: accentVisible ? 1 - (2 * (accentTop - layerTop)) / bounds.height : 2,
         accentProgress: accentVisible ? accentProgress : 0,
         progress,
-        detail: frame.progress > 0 ? 0 : 1,
+        detail: storyProgress > 0 ? 0 : 1,
         aspect: bounds.width / Math.max(1, bounds.height),
         cropY: -layerTop / Math.max(1, bounds.height),
         cropHeight: window.innerHeight / Math.max(1, bounds.height),

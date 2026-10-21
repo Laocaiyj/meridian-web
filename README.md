@@ -3,7 +3,8 @@
 The public website for Meridian, an AI development workspace by Mou-Hau Logic.
 
 - Website: https://meridianwork.cn
-- React desktop-oriented landing page with native WebGPU quartz graphics and a local PNG fallback.
+- Responsive React landing page with native WebGPU quartz graphics and a local PNG fallback.
+- Desktop and phone share one pinned scroll presentation, including project creation, handoff and review. Narrow layouts preserve readable type; reduced motion and short windows use complete static chapters.
 - The project workflow is a concept demonstration. Installers are not available yet.
 - Chinese and English content lives in `src/content/site.json`.
 

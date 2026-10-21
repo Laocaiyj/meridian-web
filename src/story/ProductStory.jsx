@@ -207,8 +207,16 @@ export function ProductStory({ content, heroRef }) {
               data-renderer={rendererState}
             />
             <div className="story-caption">
-              <h3>{current.title}</h3>
-              <p>{current.description}</p>
+              <div className="story-caption-current">
+                <h3>{current.title}</h3>
+                <p>{current.description}</p>
+              </div>
+              {content.chapters.map((item) => (
+                <div className="story-caption-sizer" key={item.id} aria-hidden="true">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              ))}
             </div>
             <div className="story-chapters" aria-label={content.eyebrow}>
               {content.chapters.map((item, index) => (

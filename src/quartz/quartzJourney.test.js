@@ -182,3 +182,34 @@ test('the backing store covers the visible window while preserving the full scul
   ).toBe(0);
   f.owner.dispose();
 });
+
+test('flow sculpture follows scroll independently of the selected phone chapter', () => {
+  const f = fixture();
+  f.owner.setActivity(true, false);
+  y = 1300;
+  f.owner.present({ ...f.frame(0.333), narrow: true });
+  const first = renderer.render.mock.calls.at(-1)[0].progress;
+  f.owner.present({ ...f.frame(0.999), narrow: true });
+  expect(renderer.render.mock.calls.at(-1)[0].progress).toBe(first);
+  y = 1500;
+  f.owner.present({ ...f.frame(0.999), narrow: true });
+  expect(renderer.render.mock.calls.at(-1)[0].progress).toBeGreaterThan(first);
+  f.owner.dispose();
+});
+
+test('phone unfolding finishes before the fixed roots start leaving the second section', () => {
+  const f = fixture();
+  f.boundary.getBoundingClientRect = () => ({ top: 800 - y, bottom: 4000 - y });
+  f.owner.setActivity(true, false);
+  const exitAt = 4000 - (window.innerHeight + 1000) / 2;
+  y = exitAt - 20;
+  f.owner.present({ ...f.frame(), narrow: true });
+  const fixedTop = parseFloat(f.layer.style.top);
+  expect(Number(f.layer.dataset.progress)).toBeLessThan(1);
+  y = exitAt + 20;
+  f.owner.present({ ...f.frame(), narrow: true });
+  expect(Number(f.layer.dataset.progress)).toBe(1);
+  expect(Number(f.layer.dataset.accentProgress)).toBe(1);
+  expect(parseFloat(f.layer.style.top)).toBeLessThan(fixedTop);
+  f.owner.dispose();
+});

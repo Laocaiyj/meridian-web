@@ -86,6 +86,18 @@ export function createStoryPlayback({
     workspace.querySelectorAll('[data-when]').forEach((node) => {
       node.hidden = !visible[node.dataset.when];
     });
+    // The phone keeps the same pinned stage. Scroll reveals oversized documents within it.
+    const document = workspace.querySelector('.sb-spread');
+    const overflow = document
+      ? Math.max(
+          0,
+          document.getBoundingClientRect().height - workspace.getBoundingClientRect().height,
+        )
+      : 0;
+    // Keep the late handoff state in view before revealing the result at chapter end.
+    const reveal = currentFrame.chapter === 1 ? currentFrame.phase ** 3 : currentFrame.phase;
+    const pan = currentFrame.narrow && !currentFrame.static ? -overflow * reveal : 0;
+    workspace.style.setProperty('--document-offset', `${pan}px`);
   }
 
   function present(frame) {
@@ -119,6 +131,7 @@ export function createStoryPlayback({
       if (!disposed) {
         copyNarrative();
         projectWorkspace();
+        controller.refresh();
       }
     },
     dispose() {
@@ -143,22 +156,26 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
     previousStatic = false,
     hasDynamicFrame = false;
   const isStatic = () => reduced || window.innerHeight < 680;
+  const isNarrow = () => window.innerWidth <= 900;
   function readingStage() {
     const rect = stage.getBoundingClientRect();
     return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
   }
   function showSelected() {
-    if (hasDynamicFrame && readingStage()) wasStatic = true;
+    if (!isNarrow() && hasDynamicFrame && readingStage()) wasStatic = true;
     onFrame({
       ...getPresentationFrame((selected + 0.999) / 3),
       phase: 1,
-      static: true,
+      static: !isNarrow() || isStatic(),
+      ...(isNarrow() ? { narrow: true } : {}),
       ...position(),
     });
   }
   function position() {
     const rect = track.getBoundingClientRect();
-    const inset = Math.max(32, (window.innerHeight - stage.getBoundingClientRect().height) / 2);
+    const inset = isNarrow()
+      ? 32
+      : Math.max(32, (window.innerHeight - stage.getBoundingClientRect().height) / 2);
     return { scroll: window.scrollY, handoff: window.scrollY + rect.top - inset };
   }
   function measure() {
@@ -166,7 +183,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
     if (disposed || !active || isStatic()) return;
     const rect = track.getBoundingClientRect();
     const stageHeight = stage.getBoundingClientRect().height;
-    const inset = Math.max(32, (window.innerHeight - stageHeight) / 2);
+    const inset = isNarrow() ? 32 : Math.max(32, (window.innerHeight - stageHeight) / 2);
     const progress = (inset - rect.top) / Math.max(1, rect.height - stageHeight);
     const frame = getPresentationFrame(progress);
     selected = frame.chapter;
@@ -176,6 +193,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
       ...frame,
       ...position(),
       static: false,
+      ...(isNarrow() ? { narrow: true } : {}),
       art: art
         ? {
             width: art.width,
@@ -189,7 +207,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
   function scrollToChapter(phase, behavior) {
     const rect = track.getBoundingClientRect();
     const stageHeight = stage.getBoundingClientRect().height;
-    const inset = Math.max(32, (window.innerHeight - stageHeight) / 2);
+    const inset = isNarrow() ? 32 : Math.max(32, (window.innerHeight - stageHeight) / 2);
     window.scrollTo({
       top:
         window.scrollY + rect.top - inset + ((rect.height - stageHeight) * (selected + phase)) / 3,

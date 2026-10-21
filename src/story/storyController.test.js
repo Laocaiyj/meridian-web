@@ -237,3 +237,53 @@ test('inverse ink mirrors only narrative text, keeps links semantic and disposes
   expect(ink.hidden).toBe(true);
   expect(f.stage.dataset.ink).toBeUndefined();
 });
+
+test('phone retains the desktop pinned timeline and every reversible demonstration phase', () => {
+  const width = window.innerWidth;
+  Object.defineProperty(window, 'innerWidth', { configurable: true, value: 390 });
+  const f = fixture();
+  const control = createStoryController(f.track, f.stage, callback);
+  try {
+    control.setActivity(true, false);
+    const at = (chapter, phase) => {
+      f.move(32 - (1800 * (chapter + phase)) / 3);
+      flush();
+      return callback.mock.calls.at(-1)[0];
+    };
+    expect(at(0, 0.1)).toMatchObject({ created: false, narrow: true });
+    expect(at(0, 0.4).created).toBe(true);
+    expect(at(1, 0.7).handedOff).toBe(false);
+    expect(at(1, 0.9).handedOff).toBe(true);
+    expect(at(2, 0.3).corrected).toBe(false);
+    expect(at(2, 0.6).corrected).toBe(true);
+    expect(at(2, 0.9).verified).toBe(true);
+    expect(at(2, 0.3).corrected).toBe(false);
+    expect(pending.size).toBe(0);
+  } finally {
+    control.dispose();
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: width });
+  }
+});
+
+test('phone chapter height changes do not move the sculpture scroll reference', () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  Object.defineProperty(window, 'innerWidth', { configurable: true, value: 430 });
+  Object.defineProperty(window, 'innerHeight', { configurable: true, value: 932 });
+  const f = fixture();
+  const control = createStoryController(f.track, f.stage, callback);
+  try {
+    control.setActivity(true, false);
+    flush();
+    const origin = callback.mock.calls.at(-1)[0].handoff;
+    const oldRect = f.stage.getBoundingClientRect();
+    f.stage.getBoundingClientRect = () => ({ ...oldRect, height: 500 });
+    control.refresh();
+    flush();
+    expect(callback.mock.calls.at(-1)[0].handoff).toBe(origin);
+  } finally {
+    control.dispose();
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: width });
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: height });
+  }
+});

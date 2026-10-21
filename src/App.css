@@ -122,3 +122,11 @@ p {
 .quartz-journey .quartz-poster-accent {
   filter: grayscale(1) brightness(0.35) contrast(1.35) url(#meridian-film-grade);
 }
+
+@media (max-width: 900px) {
+  .language-button {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    min-height: 44px;
+  }
+}
