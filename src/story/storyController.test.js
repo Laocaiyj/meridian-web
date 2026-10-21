@@ -119,7 +119,6 @@ test('playback projects one frame to chapter, workspace and renderer without Rea
   });
   expect(createQuartzScene).not.toHaveBeenCalled();
   expect(workspace.dataset.progress).toBe('0.0000');
-  expect(f.stage.style.getPropertyValue('--ink-weight')).toBe('500');
   expect(workspace.querySelector('[data-when="corrected"]').hidden).toBe(true);
   expect(renderer.render).not.toHaveBeenCalled();
   playback.setActivity(true, false);
@@ -128,16 +127,15 @@ test('playback projects one frame to chapter, workspace and renderer without Rea
   expect(onChapter).toHaveBeenLastCalledWith(2);
   expect(workspace.dataset.progress).toBe('1.0000');
   expect(workspace.style.getPropertyValue('--phase')).toBe('1');
-  expect(f.stage.style.getPropertyValue('--ink-weight')).toBe('700');
   f.move(-900);
   flush();
-  const middleInk = f.stage.style.cssText;
+  const middleProgress = workspace.dataset.progress;
   f.move(-1300);
   flush();
-  expect(f.stage.style.cssText).not.toBe(middleInk);
+  expect(workspace.dataset.progress).not.toBe(middleProgress);
   f.move(-900);
   flush();
-  expect(f.stage.style.cssText).toBe(middleInk);
+  expect(workspace.dataset.progress).toBe(middleProgress);
   f.move(-1800);
   flush();
   expect(workspace.querySelector('[data-when="corrected"]').hidden).toBe(false);
@@ -197,7 +195,6 @@ test('static playback selects complete chapters while the renderer remains inact
   expect(workspace.querySelector('[data-when="handedOff"]').hidden).toBe(false);
   expect(workspace.querySelector('[data-when="!handedOff"]').hidden).toBe(true);
   expect(workspace.style.getPropertyValue('--phase')).toBe('1');
-  expect(f.stage.style.getPropertyValue('--ink-weight')).toBe('700');
   expect(renderer.render.mock.calls.every(([frame]) => frame.active === false)).toBe(true);
   expect(renderer.resize).not.toHaveBeenCalled();
   expect(pending.size).toBe(0);

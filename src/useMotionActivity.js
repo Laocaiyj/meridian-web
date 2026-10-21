@@ -17,7 +17,7 @@ export function useMotionActivity(target, paused = false) {
     const onPreference = () => setReduced(media.matches);
     const onVisibility = () => setVisible(!document.hidden);
     const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting), {
-      threshold: 0.05,
+      threshold: 0,
     });
     if (target.current) observer.observe(target.current);
     media.addEventListener('change', onPreference);

@@ -6,7 +6,11 @@ async function phase(page, chapter, amount) {
     const rect = el.getBoundingClientRect();
     const height = document.querySelector('.story-stage').getBoundingClientRect().height;
     scrollTo({
-      top: scrollY + rect.top - 32 + (rect.height - height) * progress,
+      top:
+        scrollY +
+        rect.top -
+        parseFloat(getComputedStyle(document.querySelector('.story-stage')).top) +
+        (rect.height - height) * progress,
       behavior: 'instant',
     });
   }, value);
@@ -36,7 +40,7 @@ for (const viewport of [
       for (let i = 0; i < 3; i++) {
         await page.locator('.story-chapters a').nth(i).tap();
         await expect(page.locator('.workspace-demo')).toHaveAttribute('data-chapter', String(i));
-        if (viewport.height >= 680) {
+        {
           // Wait for the user-facing smooth jump to settle before an exact test scroll.
           await page.evaluate(
             (target) =>
@@ -60,7 +64,7 @@ for (const viewport of [
           await phase(page, i, 0.001);
           await expect(page.locator('.story-stage')).toHaveCSS('position', 'sticky');
           const stage = await page.locator('.story-stage').boundingBox();
-          expect(Math.abs(stage.y - 32)).toBeLessThan(1);
+          expect(Math.abs(stage.y - (viewport.height <= 540 ? 16 : 32))).toBeLessThan(1);
           navPositions.push((await page.locator('.story-chapters').boundingBox()).y);
           await phase(page, i, 0.999);
           const documentEnd = await page.locator('.sb-artifact').boundingBox();
@@ -114,19 +118,13 @@ test('phone retains creation, handoff, correction, verification and reversible d
     expect(
       await page.locator('.sb-transfer [data-when="handedOff"]').evaluate((el) => el.hidden),
     ).toBe(true);
-    const offset = await page
-      .locator('.workspace-demo')
-      .evaluate((el) => el.style.getPropertyValue('--document-offset'));
+    const offset = await page.locator('.sb-spread').evaluate((el) => el.style.transform);
     await phase(page, 1, 0.9);
     expect(
       await page.locator('.sb-transfer [data-when="handedOff"]').evaluate((el) => el.hidden),
     ).toBe(false);
     await phase(page, 1, 0.7);
-    expect(
-      await page
-        .locator('.workspace-demo')
-        .evaluate((el) => el.style.getPropertyValue('--document-offset')),
-    ).toBe(offset);
+    expect(await page.locator('.sb-spread').evaluate((el) => el.style.transform)).toBe(offset);
     await phase(page, 2, 0.3);
     expect(await page.locator('.sb-new-condition').evaluate((el) => el.hidden)).toBe(true);
     await phase(page, 2, 0.6);

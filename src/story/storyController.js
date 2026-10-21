@@ -1,4 +1,4 @@
-import { getPresentationFrame } from './presentation';
+import { getPresentationFrame, presentationMilestones } from './presentation';
 import { createQuartzJourney } from '../quartz/quartzJourney';
 
 /**
@@ -23,6 +23,13 @@ export function createStoryPlayback({
   let currentChapter = 0;
   let inkActive = false;
   let currentFrame = getPresentationFrame(0);
+  let layoutDirty = true,
+    documentOverflow = 0,
+    documentSpread = null,
+    panStops = [
+      [0, 0],
+      [1, 0],
+    ];
   const journey = createQuartzJourney({
     hero,
     boundary,
@@ -49,29 +56,83 @@ export function createStoryPlayback({
         return copy;
       })
       .filter(Boolean);
-    ink.replaceChildren(...copies);
+    const projection = document.createElement('div');
+    projection.className = 'story-ink-projection';
+    const strength = document.createElement('div');
+    strength.className = 'story-ink-strength';
+    strength.append(
+      ...copies.map((copy) => {
+        const heavy = copy.cloneNode(true);
+        heavy.className += '-heavy';
+        return heavy;
+      }),
+    );
+    projection.append(...copies, strength);
+    ink.replaceChildren(projection);
+    layoutDirty = true;
   }
 
-  function projectInk() {
-    const amount = currentFrame.static ? 1 : Math.min(1, currentFrame.progress / 0.85);
-    const weight = String(Math.round(500 + 200 * amount));
-    stage.style.setProperty('--ink-weight', weight);
+  // Geometry changes on content/viewport commits, never on continuous paint-only frames.
+  function measureLayout() {
+    if (!layoutDirty) return;
+    layoutDirty = false;
+    documentSpread = workspace.querySelector('.sb-spread');
+    const viewport = workspace.getBoundingClientRect();
+    const sheet = documentSpread?.getBoundingClientRect();
+    documentOverflow = sheet ? Math.max(0, sheet.height - viewport.height) : 0;
+    const focus = (selector) => {
+      const box = workspace.querySelector(selector)?.getBoundingClientRect();
+      return box && sheet
+        ? Math.max(
+            0,
+            Math.min(documentOverflow, box.top - sheet.top + box.height / 2 - viewport.height / 2),
+          )
+        : 0;
+    };
+    // Pause the document camera on newly introduced states, then reveal the result.
+    // Milestones are shared with fixture state changes; fixed viewport-size curves cannot do this.
+    const m = presentationMilestones;
+    const cues =
+      currentFrame.chapter === 0
+        ? [[m.created, 0.42, '.sb-task-result > [data-when="created"]']]
+        : currentFrame.chapter === 1
+          ? [[m.handedOff, 0.9, '.sb-handoff > div:last-child > [data-when="handedOff"]']]
+          : [
+              [m.corrected, 0.64, '.sb-review-finding > [data-when="corrected"]'],
+              [m.verified, 0.9, '.sb-task-result > [data-when="verified"]'],
+            ];
+    panStops = [[0, 0]];
+    for (const [at, holdUntil, selector] of cues) {
+      const offset = Math.max(panStops.at(-1)[1], focus(selector));
+      panStops.push([at, offset], [holdUntil, offset]);
+    }
+    panStops.push([1, documentOverflow]);
     if (!ink) return;
     const box = stage.getBoundingClientRect();
-    ink.hidden = !inkActive || box.bottom <= 0 || box.top >= window.innerHeight;
+    const rail = track.getBoundingClientRect();
     Object.assign(ink.style, {
-      left: `${box.left}px`,
-      top: `${box.top}px`,
+      left: `${box.left + window.scrollX}px`,
+      top: `${rail.top + window.scrollY}px`,
       width: `${box.width}px`,
+      height: `${rail.height}px`,
     });
-    ink.style.setProperty('--ink-weight', weight);
+    ink.style.setProperty('--projection-height', `${box.height}px`);
+    ink.style.setProperty('--projection-inset', getComputedStyle(stage).top);
+  }
+  function projectInk() {
+    const amount = currentFrame.static ? 1 : Math.min(1, currentFrame.progress / 0.85);
+    if (!ink) return;
+    ink.hidden = !inkActive;
+    ink.dataset.static = String(Boolean(currentFrame.static));
+    const strength = ink.querySelector('.story-ink-strength');
+    if (strength) strength.style.opacity = String(amount);
     if (inkActive) stage.dataset.ink = 'ready';
     else delete stage.dataset.ink;
   }
 
   function projectWorkspace() {
     projectInk();
-    workspace.style.setProperty('--phase', currentFrame.phase);
+    if (!documentSpread) workspace.style.setProperty('--phase', currentFrame.phase);
     workspace.dataset.progress = currentFrame.progress.toFixed(4);
     const visible = {
       created: currentFrame.created,
@@ -84,34 +145,51 @@ export function createStoryPlayback({
       '!verified': !currentFrame.verified,
     };
     workspace.querySelectorAll('[data-when]').forEach((node) => {
-      node.hidden = !visible[node.dataset.when];
+      const hidden = !visible[node.dataset.when];
+      if (node.hidden !== hidden) node.hidden = hidden;
     });
-    // The phone keeps the same pinned stage. Scroll reveals oversized documents within it.
-    const document = workspace.querySelector('.sb-spread');
-    const overflow = document
-      ? Math.max(
-          0,
-          document.getBoundingClientRect().height - workspace.getBoundingClientRect().height,
-        )
-      : 0;
-    // Keep the late handoff state in view before revealing the result at chapter end.
-    const reveal = currentFrame.chapter === 1 ? currentFrame.phase ** 3 : currentFrame.phase;
-    const pan = currentFrame.narrow && !currentFrame.static ? -overflow * reveal : 0;
-    workspace.style.setProperty('--document-offset', `${pan}px`);
+    const phase = currentFrame.phase;
+    let pan = 0;
+    if (!currentFrame.static) {
+      for (let i = 1; i < panStops.length; i++) {
+        const [end, to] = panStops[i];
+        const [start, from] = panStops[i - 1];
+        if (phase <= end) {
+          const t = Math.max(0, Math.min(1, (phase - start) / (end - start)));
+          pan = -(from + (to - from) * t * t * (3 - 2 * t));
+          break;
+        }
+      }
+    }
+    if (documentSpread) documentSpread.style.transform = `translateY(${pan}px)`;
   }
 
   function present(frame) {
     currentFrame = frame;
+    measureLayout();
+    journey.present(frame);
     if (currentChapter !== frame.chapter) {
       currentChapter = frame.chapter;
       onChapter(frame.chapter);
     }
     projectWorkspace();
-    return journey.present(frame);
+    return false;
   }
 
   const controller = createStoryController(track, stage, present, artwork);
+  const invalidateLayout = () => {
+    layoutDirty = true;
+    controller.refresh();
+  };
+  const observer =
+    typeof ResizeObserver === 'function' ? new ResizeObserver(invalidateLayout) : null;
+  observer?.observe(stage);
+  observer?.observe(workspace);
+  const spread = workspace.querySelector('.sb-spread');
+  if (spread) observer?.observe(spread);
+  window.addEventListener('resize', invalidateLayout);
   copyNarrative();
+  measureLayout();
   projectWorkspace();
   return {
     setActivity(active, reduced) {
@@ -130,6 +208,12 @@ export function createStoryPlayback({
     refreshWorkspace() {
       if (!disposed) {
         copyNarrative();
+        observer?.disconnect();
+        observer?.observe(stage);
+        observer?.observe(workspace);
+        const spread = workspace.querySelector('.sb-spread');
+        if (spread) observer?.observe(spread);
+        measureLayout();
         projectWorkspace();
         controller.refresh();
       }
@@ -137,6 +221,8 @@ export function createStoryPlayback({
     dispose() {
       if (disposed) return;
       disposed = true;
+      observer?.disconnect();
+      window.removeEventListener('resize', invalidateLayout);
       controller.dispose();
       journey.dispose();
       if (ink) ink.hidden = true;
@@ -154,9 +240,18 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
     selected = 0,
     wasStatic = false,
     previousStatic = false,
-    hasDynamicFrame = false;
-  const isStatic = () => reduced || window.innerHeight < 680;
+    hasDynamicFrame = false,
+    lastProgress = 0;
+  const isStatic = () => reduced;
   const isNarrow = () => window.innerWidth <= 900;
+  const insetFor = (height) => {
+    const css = parseFloat(getComputedStyle(stage).top);
+    return Number.isFinite(css)
+      ? css
+      : isNarrow()
+        ? 32
+        : Math.max(32, (window.innerHeight - height) / 2);
+  };
   function readingStage() {
     const rect = stage.getBoundingClientRect();
     return rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
@@ -173,9 +268,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
   }
   function position() {
     const rect = track.getBoundingClientRect();
-    const inset = isNarrow()
-      ? 32
-      : Math.max(32, (window.innerHeight - stage.getBoundingClientRect().height) / 2);
+    const inset = insetFor(stage.getBoundingClientRect().height);
     return { scroll: window.scrollY, handoff: window.scrollY + rect.top - inset };
   }
   function measure() {
@@ -183,10 +276,11 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
     if (disposed || !active || isStatic()) return;
     const rect = track.getBoundingClientRect();
     const stageHeight = stage.getBoundingClientRect().height;
-    const inset = isNarrow() ? 32 : Math.max(32, (window.innerHeight - stageHeight) / 2);
+    const inset = insetFor(stageHeight);
     const progress = (inset - rect.top) / Math.max(1, rect.height - stageHeight);
     const frame = getPresentationFrame(progress);
     selected = frame.chapter;
+    lastProgress = frame.progress;
     if (frame.progress > 0) hasDynamicFrame = true;
     const art = artwork?.getBoundingClientRect();
     onFrame({
@@ -207,7 +301,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
   function scrollToChapter(phase, behavior) {
     const rect = track.getBoundingClientRect();
     const stageHeight = stage.getBoundingClientRect().height;
-    const inset = isNarrow() ? 32 : Math.max(32, (window.innerHeight - stageHeight) / 2);
+    const inset = insetFor(stageHeight);
     window.scrollTo({
       top:
         window.scrollY + rect.top - inset + ((rect.height - stageHeight) * (selected + phase)) / 3,
@@ -238,8 +332,20 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
     if (request !== null) window.cancelAnimationFrame(request);
     request = null;
   }
+  function resize() {
+    if (!reduced && lastProgress > 0 && lastProgress < 1) {
+      const rect = track.getBoundingClientRect();
+      const height = stage.getBoundingClientRect().height;
+      const inset = insetFor(height);
+      window.scrollTo({
+        top: window.scrollY + rect.top - inset + (rect.height - height) * lastProgress,
+        behavior: 'instant',
+      });
+    }
+    schedule();
+  }
   window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
+  window.addEventListener('resize', resize);
   return {
     refresh: schedule,
     setActivity(nextActive, nextReduced) {
@@ -260,7 +366,7 @@ export function createStoryController(track, stage, onFrame, artwork = null) {
       disposed = true;
       cancel();
       window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
+      window.removeEventListener('resize', resize);
     },
   };
 }

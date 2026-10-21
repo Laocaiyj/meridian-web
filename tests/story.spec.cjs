@@ -221,10 +221,26 @@ test('selected complete chapter survives reduced-motion and short-window recover
   await expect(page.getByText('3 项示例检查通过')).toBeVisible();
   await expect(review).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 600 });
+  await page.evaluate(
+    () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))),
+  );
   await page.getByRole('link', { name: /代码与协作/ }).click();
   await expect(page.locator('.workspace-demo')).toHaveAttribute('data-chapter', '1');
+  // Short windows now retain the smooth chapter jump; settle before an exact test seek.
+  await expect
+    .poll(async () => Number(await page.locator('.workspace-demo').getAttribute('data-progress')))
+    .toBeCloseTo(0.36, 3);
+  await progress(page, 0.5);
   await page.setViewportSize({ width: 1280, height: 800 });
+  await page.evaluate(
+    () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))),
+  );
   await expect(page.locator('.workspace-demo')).toHaveAttribute('data-chapter', '1');
+  await expect
+    .poll(async () => Number(await page.locator('.workspace-demo').getAttribute('data-progress')))
+    .toBeCloseTo(0.5, 2);
+  await expect(page.getByText('已交接 · 变更与检查要求')).toBeHidden();
+  await progress(page, 0.64);
   await expect(page.getByText('已交接 · 变更与检查要求')).toBeVisible();
 });
 
@@ -398,7 +414,7 @@ test('inverse narrative stays aligned, reverses weight and preserves the origina
   await expect(ink).toHaveAttribute('aria-hidden', 'true');
   await expect(ink).toHaveCSS('mix-blend-mode', 'difference');
   await expect(ink).toHaveCSS('pointer-events', 'none');
-  const weight = () => ink.evaluate((n) => n.style.getPropertyValue('--ink-weight'));
+  const weight = () => ink.locator('.story-ink-strength').evaluate((n) => n.style.opacity);
   const first = await weight();
   const original = await page.locator('.story-caption').boundingBox();
   const copy = await page.locator('.story-ink-caption').boundingBox();
@@ -419,7 +435,7 @@ test('inverse narrative stays aligned, reverses weight and preserves the origina
   await expect(link).toHaveCSS('box-shadow', 'rgb(255, 255, 255) 0px 0px 0px 4px');
   await page.keyboard.press('Enter');
   await expect(page.getByText('3 项示例检查通过')).toBeVisible();
-  expect(await weight()).toBe('700');
+  expect(await weight()).toBe('1');
 });
 
 test('pinned narrative keeps glyph and chapter positions while emphasis changes', async ({
@@ -437,7 +453,7 @@ test('pinned narrative keeps glyph and chapter positions while emphasis changes'
         glyphWidth: range.getBoundingClientRect().width,
         paragraphY: ink.querySelector('p').getBoundingClientRect().y,
         links: [...ink.querySelectorAll('a')].map((a) => a.getBoundingClientRect().x),
-        position: getComputedStyle(ink).position,
+        position: getComputedStyle(ink.querySelector('.story-ink-projection')).position,
       };
     });
   const first = await snapshot();
@@ -447,6 +463,6 @@ test('pinned narrative keeps glyph and chapter positions while emphasis changes'
   expect(Math.abs(last.paragraphY - first.paragraphY)).toBeLessThan(0.1);
   for (let i = 0; i < first.links.length; i++)
     expect(Math.abs(last.links[i] - first.links[i])).toBeLessThan(0.1);
-  expect(last.position).toBe('fixed');
+  expect(last.position).toBe('sticky');
   await expect(page.locator('.story-ink')).toHaveCSS('mix-blend-mode', 'difference');
 });
