@@ -1,4 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { selectLanguage } = require('./language.cjs');
+
+// Existing presentation regressions start with an explicit Chinese preference.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('meridian-language', 'zh'));
+});
 test.use({ isMobile: true, hasTouch: true });
 async function phase(page, chapter, amount) {
   const value = (chapter + amount) / 3;
@@ -30,7 +36,7 @@ for (const viewport of [
     await page.setViewportSize(viewport);
     await page.goto('./');
     for (const language of ['zh', 'en']) {
-      if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+      if (language === 'en') await selectLanguage(page, 'en');
       const mark = await page.locator('.hero-wordmark').boundingBox();
       expect(mark.x).toBeGreaterThanOrEqual(16);
       expect(mark.x + mark.width).toBeLessThanOrEqual(viewport.width - 16);
@@ -109,7 +115,7 @@ test('phone retains creation, handoff, correction, verification and reversible d
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./');
   for (const language of ['zh', 'en']) {
-    if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+    if (language === 'en') await selectLanguage(page, 'en');
     await phase(page, 0, 0.1);
     expect(await page.locator('.sb-repository').evaluate((el) => el.hidden)).toBe(true);
     await phase(page, 0, 0.4);
@@ -185,7 +191,7 @@ test('short dynamic phone keeps the newly delivered handoff state readable befor
 }) => {
   await page.setViewportSize({ width: 360, height: 680 });
   await page.goto('./');
-  await page.getByRole('button', { name: '切换为英文' }).click();
+  await selectLanguage(page, 'en');
   for (const amount of [0.801, 0.9]) {
     await phase(page, 1, amount);
     const box = await page

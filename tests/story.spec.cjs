@@ -1,4 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { selectLanguage } = require('./language.cjs');
+
+// Existing presentation regressions start with an explicit Chinese preference.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('meridian-language', 'zh'));
+});
 
 async function progress(page, value) {
   await page.evaluate((p) => {
@@ -51,7 +57,7 @@ test('one project proceeds through code, handoff, correction and delivery, and r
   await page.waitForTimeout(350);
   expect(await page.locator('.workspace-demo').innerText()).toBe(snapshot);
   await page.locator('#header').scrollIntoViewIfNeeded();
-  await page.getByRole('button', { name: '切换为英文' }).click();
+  await selectLanguage(page, 'en');
   await progress(page, 0.7);
   await expect(page.locator('.workspace-demo')).toHaveAttribute('data-chapter', '2');
   await expect(page.getByText('Missing case: selecting all should show every note.')).toBeVisible();
@@ -154,7 +160,7 @@ for (const viewport of [
     await page.setViewportSize(viewport);
     await page.goto('./?demo=legacy');
     for (const language of ['zh', 'en']) {
-      if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+      if (language === 'en') await selectLanguage(page, 'en');
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
       const trigger = page.getByRole('button', {
         name: language === 'zh' ? '下载' : 'Download',
@@ -442,7 +448,7 @@ test('pinned narrative keeps glyph and chapter positions while emphasis changes'
   page,
 }) => {
   await page.goto('./?demo=storyboard');
-  await page.locator('.language-button').click();
+  await selectLanguage(page, 'en');
   await progress(page, 0.68);
   const snapshot = () =>
     page.locator('.story-ink').evaluate((ink) => {

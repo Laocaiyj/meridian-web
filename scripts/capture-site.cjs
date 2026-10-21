@@ -1,3 +1,4 @@
+const { selectLanguage } = require('../tests/language.cjs');
 const { chromium } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -46,8 +47,8 @@ async function main() {
         const errors = [];
         page.on('pageerror', (error) => errors.push(error.message));
         await page.goto(process.env.SITE_PREVIEW_URL || 'http://127.0.0.1:4176/');
-        for (const language of ['zh', 'en']) {
-          if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+        for (const language of ['en', 'zh', 'ja', 'ko']) {
+          await selectLanguage(page, language);
           if (!staticOnly) {
             await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
             await page.waitForFunction(
@@ -151,7 +152,7 @@ async function main() {
     }
     fs.writeFileSync(path.join(output, 'layout.json'), JSON.stringify(records, null, 2) + '\n');
     console.log(
-      `Captured bilingual desktop ${staticOnly ? 'static' : 'GPU and static'} states: ${output}`,
+      `Captured four-language desktop ${staticOnly ? 'static' : 'GPU and static'} states: ${output}`,
     );
   } finally {
     await browser.close();

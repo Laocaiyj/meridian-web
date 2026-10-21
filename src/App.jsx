@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Hero } from './hero/Hero';
 import { CompanyFooter } from './CompanyFooter';
 import { ProductStory, Principles } from './story/ProductStory';
-import { getSiteContent, usePageMetadata } from './content/site';
+import { getSiteContent, useSiteLanguage, usePageMetadata } from './content/site';
+import { LanguagePicker } from './content/LanguagePicker';
 import './App.css';
 
 export default function App() {
   const heroRef = useRef(null);
-  const [language, setLanguage] = useState('zh');
+  const [language, setLanguage] = useSiteLanguage();
   const content = getSiteContent(language);
   usePageMetadata(content);
   useEffect(() => {
@@ -43,14 +44,11 @@ export default function App() {
           </filter>
         </defs>
       </svg>
-      <button
-        type="button"
-        className="language-button"
-        aria-label={content.language.switchLabel}
-        onClick={() => setLanguage((value) => (value === 'zh' ? 'en' : 'zh'))}
-      >
-        {content.language.label}
-      </button>
+      <LanguagePicker
+        language={language}
+        label={content.language.selectLabel}
+        onChange={setLanguage}
+      />
       <main>
         <Hero heroRef={heroRef} content={content.hero} download={content.download} />
         <ProductStory heroRef={heroRef} content={content.story} />

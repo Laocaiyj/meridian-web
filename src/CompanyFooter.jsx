@@ -7,8 +7,18 @@ export function CompanyFooter({ content }) {
       <div className="company-inner">
         <div className="company-columns">
           <div className="company-about">
-            <h2 id="company-heading">{content.name}</h2>
-            <p className="company-alias" translate="no">
+            <h2
+              id="company-heading"
+              lang={content.name === 'Mou-Hau Logic' ? 'en' : 'zh-Hant'}
+              translate="no"
+            >
+              {content.name}
+            </h2>
+            <p
+              className="company-alias"
+              lang={content.alias === 'Mou-Hau Logic' ? 'en' : 'zh-Hant'}
+              translate="no"
+            >
               {content.alias}
             </p>
           </div>

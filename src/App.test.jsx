@@ -5,19 +5,105 @@ import { Hero } from './hero/Hero';
 
 beforeEach(() => {
   window.scrollTo = () => {};
+  localStorage.clear();
+  localStorage.setItem('meridian-language', 'zh');
 });
 afterEach(cleanup);
+const chooseLanguage = (view, code) => {
+  fireEvent.click(view.getByRole('combobox'));
+  fireEvent.click(
+    view.getByRole('option', {
+      name: { en: 'English', zh: '中文', ja: '日本語', ko: '한국어' }[code],
+      exact: true,
+    }),
+  );
+};
 
-test('the language control names the current language while switching all page metadata', () => {
+test('language picker opens a styled list and cancels keyboard browsing without changing language', () => {
+  localStorage.clear();
   const view = render(<App />);
-  const language = view.getByRole('button', { name: '切换为英文' });
-  expect(language).toHaveTextContent('中文');
-  fireEvent.click(language);
-  expect(view.getByRole('button', { name: 'Switch to Chinese' })).toHaveTextContent('EN');
+  const picker = view.getByRole('combobox', { name: 'Language' });
+  expect(view.queryByRole('listbox')).toBeNull();
+  fireEvent.click(picker);
+  expect(view.getByRole('listbox')).toBeVisible();
+  expect(view.getByRole('option', { name: 'English' })).toHaveAttribute('aria-selected', 'true');
+  fireEvent.keyDown(picker, { key: 'ArrowDown' });
+  fireEvent.keyDown(picker, { key: 'Escape' });
+  expect(view.queryByRole('listbox')).toBeNull();
+  expect(document.documentElement.lang).toBe('en');
+  expect(picker).toHaveFocus();
+  fireEvent.keyDown(picker, { key: 'End' });
+  fireEvent.keyDown(picker, { key: 'Enter' });
+  expect(document.documentElement.lang).toBe('ko');
+});
+
+// Captures missing locale routing, stale metadata and preferences lost on remount.
+test('first visit uses English regardless of browser language', () => {
+  localStorage.clear();
+  const view = render(<App />);
+  expect(view.getByRole('combobox', { name: 'Language' }).value).toBe('en');
+  expect(document.documentElement.lang).toBe('en');
+  expect(view.getByRole('link', { name: 'See how it works' })).toBeVisible();
+});
+
+test.each([
+  ['ja', 'ja', '使い方を見る', 'Meridian をダウンロード'],
+  ['ko', 'ko', '작동 방식 보기', 'Meridian 다운로드'],
+])(
+  'switching to %s updates content, dialog and saved preference',
+  (code, locale, action, title) => {
+    localStorage.clear();
+    const view = render(<App />);
+    chooseLanguage(view, code);
+    expect(document.documentElement.lang).toBe(locale);
+    expect(view.getByRole('link', { name: action })).toBeVisible();
+    expect(localStorage.getItem('meridian-language')).toBe(code);
+    fireEvent.click(
+      view.getByRole('button', { name: code === 'ja' ? 'ダウンロード' : '다운로드', exact: true }),
+    );
+    expect(view.getByRole('dialog', { name: title })).toBeVisible();
+    view.unmount();
+    const restored = render(<App />);
+    expect(restored.getByRole('combobox').value).toBe(code);
+  },
+);
+
+test('unsupported saved languages safely fall back to English', () => {
+  localStorage.setItem('meridian-language', 'fr');
+  const view = render(<App />);
+  expect(view.getByRole('link', { name: 'See how it works' })).toBeVisible();
+  expect(document.documentElement.lang).toBe('en');
+});
+
+test('the language selector switches Chinese and English metadata', () => {
+  const view = render(<App />);
+  const language = view.getByRole('combobox', { name: '语言' });
+  expect(language.value).toBe('zh');
+  chooseLanguage(view, 'en');
+  expect(view.getByRole('combobox', { name: 'Language' }).value).toBe('en');
   expect(document.title).toBe('Meridian — AI Development Workspace');
   expect(document.documentElement.lang).toBe('en');
-  fireEvent.click(view.getByRole('button', { name: 'Switch to Chinese' }));
+  chooseLanguage(view, 'zh');
   expect(document.title).toBe('Meridian — AI 开发工作空间');
+});
+
+test('blocked browser storage does not prevent language selection', () => {
+  const read = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+    throw new Error('blocked');
+  });
+  const write = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    throw new Error('blocked');
+  });
+  try {
+    const view = render(<App />);
+    expect(document.documentElement.lang).toBe('en');
+    chooseLanguage(view, 'ko');
+    expect(view.getByRole('link', { name: '작동 방식 보기' })).toBeVisible();
+    expect(document.documentElement.lang).toBe('ko');
+  } finally {
+    read.mockRestore();
+    write.mockRestore();
+  }
 });
 
 test('the App wordmark and download entry share the hero without a navigation bar', () => {
@@ -45,7 +131,7 @@ test('the hero leads into the product workflow and keeps downloads as a separate
   expect(entry.getAttribute('href')).toBe('#showcase');
   expect(hero.contains(entry)).toBe(true);
   expect(view.getByRole('heading', { name: '为完整项目而构建' })).toBeVisible();
-  fireEvent.click(view.getByRole('button', { name: '切换为英文' }));
+  chooseLanguage(view, 'en');
   expect(view.getByRole('link', { name: 'See how it works' }).getAttribute('href')).toBe(
     '#showcase',
   );

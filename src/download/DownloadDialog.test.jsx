@@ -21,18 +21,21 @@ test('the download sheet exposes a named modal dialog', () => {
   expect(view.getByRole('dialog', { name: '下载 Meridian' })).toHaveAttribute('aria-modal', 'true');
 });
 
-test.each(['zh', 'en'])('four platforms have separate unavailable actions in %s', (language) => {
-  const content = getSiteContent(language).download;
-  const view = render(<DownloadEntry label={content.trigger} content={content} />);
-  fireEvent.click(view.getByRole('button', { name: content.trigger }));
-  const platforms = view.getAllByRole('listitem');
-  expect(platforms).toHaveLength(4);
-  ['Windows', 'macOS', 'Android', 'iOS'].forEach((name, index) => {
-    expect(platforms[index]).toHaveTextContent(name);
-    const action = view.getByRole('button', { name: `${name} · ${content.unavailable}` });
-    expect(action).toBeDisabled();
-    expect(action).toHaveTextContent(content.unavailable);
-  });
-  expect(view.getAllByRole('button', { name: content.close })).toHaveLength(1);
-  expect(view.queryAllByRole('link')).toHaveLength(0);
-});
+test.each(['en', 'zh', 'ja', 'ko'])(
+  'four platforms have separate unavailable actions in %s',
+  (language) => {
+    const content = getSiteContent(language).download;
+    const view = render(<DownloadEntry label={content.trigger} content={content} />);
+    fireEvent.click(view.getByRole('button', { name: content.trigger }));
+    const platforms = view.getAllByRole('listitem');
+    expect(platforms).toHaveLength(4);
+    ['Windows', 'macOS', 'Android', 'iOS'].forEach((name, index) => {
+      expect(platforms[index]).toHaveTextContent(name);
+      const action = view.getByRole('button', { name: `${name} · ${content.unavailable}` });
+      expect(action).toBeDisabled();
+      expect(action).toHaveTextContent(content.unavailable);
+    });
+    expect(view.getAllByRole('button', { name: content.close })).toHaveLength(1);
+    expect(view.queryAllByRole('link')).toHaveLength(0);
+  },
+);

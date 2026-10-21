@@ -100,3 +100,10 @@
     gap: 16px;
   }
 }
+
+.company-about [lang='zh-Hant'] {
+  font-family:
+    'BiauKaiTC', '標楷體-繁', 'BiauKai', 'DFKai-SB', '標楷體', 'Kaiti TC', 'STKaiti', serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}

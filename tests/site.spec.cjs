@@ -1,4 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { selectLanguage } = require('./language.cjs');
+
+// Existing presentation regressions start with an explicit Chinese preference.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('meridian-language', 'zh'));
+});
 const { createHash } = require('node:crypto');
 
 test('published entry defaults to the current concept demonstration and omits the removed company description', async ({
@@ -8,7 +14,7 @@ test('published entry defaults to the current concept demonstration and omits th
   await expect(page.locator('.story-stage')).toHaveAttribute('data-demo', 'storyboard');
   await expect(page.locator('.workspace-demo')).toHaveClass(/storyboard-prototype/);
   await expect(page.getByRole('contentinfo')).not.toContainText('专注于 AI 开发工具');
-  await page.getByRole('button', { name: '切换为英文' }).click();
+  await selectLanguage(page, 'en');
   await expect(page.getByRole('contentinfo')).not.toContainText('Building AI development tools');
 });
 
@@ -18,9 +24,9 @@ test('company footer follows the technology section with bilingual information a
   await page.goto('./');
   const footer = page.getByRole('contentinfo');
   for (const language of ['zh', 'en']) {
-    if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+    if (language === 'en') await selectLanguage(page, 'en');
     await footer.scrollIntoViewIfNeeded();
-    await expect(footer).toContainText('无厚理则科技有限公司');
+    await expect(footer).toContainText('無厚理則科技有限公司');
     await expect(footer).toContainText('Mou-Hau Logic');
     await expect(footer).toContainText(language === 'zh' ? '商务联系' : 'Business inquiries');
     await expect(footer.locator('dd')).toHaveText(
@@ -103,7 +109,7 @@ test('wordmark bands reveal without layout shift, settle once and do not replay'
       .evaluate((band) => getComputedStyle(band).clipPath),
   ).not.toBe(initial);
   expect(await mark.boundingBox()).toEqual(before);
-  await page.getByRole('button', { name: '切换为英文' }).click();
+  await selectLanguage(page, 'en');
   expect(await page.evaluate(() => window.__wordmarkAnimations.length)).toBe(6);
   const translated = await mark.boundingBox();
   await page.evaluate(() => window.__wordmarkAnimations.forEach((animation) => animation.finish()));
@@ -161,7 +167,7 @@ test('hero primary entry opens the workflow by keyboard and keeps downloads seco
 }) => {
   await page.goto('./?demo=storyboard');
   for (const language of ['zh', 'en']) {
-    if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+    if (language === 'en') await selectLanguage(page, 'en');
     const entry = page.getByRole('link', {
       name: language === 'zh' ? '看看如何工作' : 'See how it works',
     });
@@ -171,6 +177,7 @@ test('hero primary entry opens the workflow by keyboard and keeps downloads seco
     });
     await expect(entry).toHaveAttribute('href', '#showcase');
     await expect(entry).toHaveCSS('background-color', 'rgb(29, 29, 31)');
+    await page.mouse.move(0, 0);
     await expect(download).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
     await entry.focus();
     await expect(entry).toBeFocused();
@@ -233,16 +240,16 @@ test('current-language labels, metadata and the original local wordmark work wit
   for (const file of ['meridian-wordmark-NOTICE.txt', 'roboto-slab-LICENSE.txt']) {
     expect((await page.request.get(`licenses/${file}`)).status()).toBe(200);
   }
-  await expect(page.getByRole('button', { name: '切换为英文' })).toHaveText('中文');
-  await page.getByRole('button', { name: '切换为英文' }).click();
-  await expect(page.getByRole('button', { name: 'Switch to Chinese' })).toHaveText('EN');
+  await expect(page.getByRole('combobox')).toHaveAttribute('value', 'zh');
+  await selectLanguage(page, 'en');
+  await expect(page.getByRole('combobox')).toHaveAttribute('value', 'en');
   await expect(page).toHaveTitle('Meridian — AI Development Workspace');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
     /projects, repositories and AI collaboration/,
   );
-  await page.getByRole('button', { name: 'Switch to Chinese' }).click();
+  await selectLanguage(page, 'zh');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
     /项目、代码库与 AI 协作/,
@@ -380,7 +387,7 @@ test('language control stays in the opening page area instead of following scrol
   page,
 }) => {
   await page.goto('./');
-  const language = page.getByRole('button', { name: '切换为英文' });
+  const language = page.getByRole('combobox');
   await expect(language).toBeInViewport();
   const start = await language.boundingBox();
   await page.evaluate(() => scrollTo({ top: innerHeight, behavior: 'instant' }));
@@ -389,6 +396,6 @@ test('language control stays in the opening page area instead of following scrol
   expect(scrolled.y).toBeCloseTo(start.y - (await page.evaluate(() => scrollY)), 0);
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect(language).toBeInViewport();
-  await language.click();
-  await expect(page.getByRole('button', { name: 'Switch to Chinese' })).toHaveText('EN');
+  await selectLanguage(page, 'en');
+  await expect(page.getByRole('combobox')).toHaveAttribute('value', 'en');
 });

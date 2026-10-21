@@ -1,4 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { selectLanguage } = require('./language.cjs');
+
+// Existing presentation regressions start with an explicit Chinese preference.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('meridian-language', 'zh'));
+});
 
 for (const viewport of [
   { width: 1024, height: 720 },
@@ -16,7 +22,7 @@ for (const viewport of [
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('./');
     for (const language of ['zh', 'en']) {
-      if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+      if (language === 'en') await selectLanguage(page, 'en');
       const trigger = page.getByRole('button', {
         name: language === 'zh' ? '下载' : 'Download',
         exact: true,

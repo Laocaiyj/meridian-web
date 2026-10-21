@@ -1,4 +1,10 @@
 const { test, expect } = require('@playwright/test');
+const { selectLanguage } = require('./language.cjs');
+
+// Existing presentation regressions start with an explicit Chinese preference.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('meridian-language', 'zh'));
+});
 async function scroll(page, target) {
   await page.evaluate((top) => scrollTo({ top, behavior: 'instant' }), target);
   await page.evaluate(
@@ -99,7 +105,7 @@ test('short stages reveal every newly introduced task state before moving to the
   ]) {
     await page.setViewportSize(viewport);
     await page.goto('./');
-    await page.getByRole('button', { name: '切换为英文' }).click();
+    await selectLanguage(page, 'en');
     for (const [progress, selector] of [
       [(1 + 0.81) / 3, '.sb-handoff > div:last-child > [data-when="handedOff"]'],
       [(1 + 0.9) / 3, '.sb-handoff > div:last-child > [data-when="handedOff"]'],
@@ -143,7 +149,7 @@ for (const [width, height] of [
     await page.setViewportSize({ width, height });
     await page.goto('./');
     for (const language of ['zh', 'en']) {
-      if (language === 'en') await page.getByRole('button', { name: '切换为英文' }).click();
+      if (language === 'en') await selectLanguage(page, 'en');
       for (let chapter = 0; chapter < 3; chapter++) {
         await seek(page, (chapter + 0.001) / 3);
         const paragraph = await page
