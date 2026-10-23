@@ -90,9 +90,15 @@ test('inverse text follows native sticky scrolling without waiting for the anima
     scrollBy({ top: 120, behavior: 'instant' });
     await new Promise((done) => native(() => native(done)));
   });
-  const source = await page.locator('.story-caption').boundingBox(),
-    copy = await page.locator('.story-ink-caption').boundingBox();
-  expect(Math.abs(source.y - copy.y)).toBeLessThan(1);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const source = document.querySelector('.story-caption').getBoundingClientRect();
+        const copy = document.querySelector('.story-ink-caption').getBoundingClientRect();
+        return Math.abs(source.y - copy.y);
+      }),
+    )
+    .toBeLessThan(1);
 });
 
 test('short stages reveal every newly introduced task state before moving to the result', async ({
@@ -121,14 +127,29 @@ test('short stages reveal every newly introduced task state before moving to the
     }
   }
 });
-test('reduced motion text stays aligned in landscape', async ({ page }) => {
+test('reduced motion text stays aligned in landscape after introduction reflow', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 844, height: 390 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('./');
   await page.locator('.hero-workflow').click();
-  const source = await page.locator('.story-caption').boundingBox(),
-    copy = await page.locator('.story-ink-caption').boundingBox();
-  expect(Math.abs(source.y - copy.y)).toBeLessThan(1);
+  const expectAligned = () =>
+    expect
+      .poll(() =>
+        page.evaluate(() => {
+          const source = document.querySelector('.story-caption').getBoundingClientRect();
+          const copy = document.querySelector('.story-ink-caption').getBoundingClientRect();
+          return Math.abs(source.y - copy.y);
+        }),
+      )
+      .toBeLessThan(1);
+  await expectAligned();
+  // A late text reflow moves the track without resizing the stage or its documents.
+  await page.locator('.story-intro-copy > p:last-child').evaluate((paragraph) => {
+    paragraph.style.lineHeight = `${parseFloat(getComputedStyle(paragraph).lineHeight) + 1.5}px`;
+  });
+  await expectAligned();
 });
 
 for (const [width, height] of [

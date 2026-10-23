@@ -3,12 +3,12 @@
     "locale": "zh-CN",
     "meta": {
       "title": "Meridian — AI 开发工作空间",
-      "description": "Meridian 将项目、代码库与 AI 协作整合在一个桌面工作空间中。创建项目、编写代码、检查变更，让工作有序接续。"
+      "description": "Meridian 是面向个人开发者与小工作室的 AI 开发工作空间。多 Agent 并行开发、独立检查，保留项目进展，让下一版接着向前。"
     },
     "hero": {
       "title": "AI 开发工作空间",
-      "paragraph": "以 Rust 桌面架构为底座，为项目上下文与持续协作设计。\n从目标、代码到变更检查，看完整开发过程如何衔接。",
-      "headline": "为完整项目而构建",
+      "paragraph": "让多 Agent 并行开发，分担从想法到可用功能的工作。\n你把握产品方向，把精力留给下一版想做的事。",
+      "headline": "让下一版，不再只靠你一个人",
       "action": "看看如何工作"
     },
     "download": {
@@ -45,27 +45,27 @@
       "selectLabel": "语言"
     },
     "story": {
-      "eyebrow": "为开发而组织",
-      "title": "从一个想法，\n到一份有据可查的成果",
-      "description": "Meridian 将项目、代码库与 AI 协作整合在一个桌面工作空间中。代码、任务与上下文彼此连接，工作可以从上次停下的地方继续。",
+      "eyebrow": "为独立开发者与小工作室而造 · 产品构想",
+      "title": "这一版的成果\n下一版接着用",
+      "description": "持续订阅，让 AI 团队接着分担下一版开发。上次做成的，留下来继续改进；新的投入，花在新的功能上。",
       "chapters": [
         {
           "id": "story-project",
           "label": "项目与代码库",
-          "title": "先有项目，再展开工作。",
-          "description": "创建或导入项目，集中管理文件、分支与变更。"
+          "title": "把工作交出去，把方向留在手里",
+          "description": "你决定产品该往哪里走，AI 团队把要做的事接起来。少在任务之间反复分派和传话，把精力放回产品取舍与体验打磨。"
         },
         {
           "id": "story-code",
           "label": "代码与协作",
-          "title": "目标一致，分工清晰。",
-          "description": "围绕同一目标分工执行，保留上下文，让开发与检查有序衔接。"
+          "title": "不必等一件做完，才开始下一件",
+          "description": "多 Agent 并行开发，功能实现与测试准备一起向前。能同时推进的工作，不必由你逐件串起来，少些等待，也少些手工对齐。"
         },
         {
           "id": "story-review",
           "label": "检查与交付",
-          "title": "看清变更，再交付。",
-          "description": "对照代码差异与检查结果，修正问题，保留交付依据。"
+          "title": "下一步，做得更有把握",
+          "description": "看见功能怎样运行，也看见还有什么问题，再决定采用这一版。独立检查把问题带回开发，留下的成果，接着成为下一轮的起点。"
         }
       ],
       "demo": {
@@ -93,58 +93,63 @@
         "label": "概念示例",
         "scenes": [
           {
-            "document": "项目要求",
-            "title": "为笔记，加入标签筛选",
-            "artifact": "项目代码库"
+            "document": "你提需求",
+            "title": "给产品加上后台任务，进度能看，也能随时停",
+            "artifact": "沿着已有成果，开始下一版"
           },
           {
-            "document": "项目任务",
-            "title": "工作交接，带上上下文",
-            "artifact": "成果片段"
+            "document": "多 Agent 并行开发",
+            "title": "功能开始实现，测试不必排队等",
+            "artifact": "把需求变成可用的体验"
           },
           {
-            "document": "退修记录",
-            "title": "发现遗漏，修正后再检查",
-            "artifact": "检查结果"
+            "document": "独立检查 · 发现并修正",
+            "title": "把这次漏掉的问题，留在交付前解决",
+            "artifact": "这次做成的，下一版接着用"
           }
         ],
-        "requirements": ["全部：保留每一条笔记", "工作：只显示工作标签", "无匹配：显示空结果"],
-        "preparing": "建立项目与代码库",
-        "ready": "项目已建立，要求与源码一并保留",
-        "executor": "执行员工",
-        "implementation": "实现筛选，补充变更",
-        "verifier": "独立验证员工",
-        "preparingHandoff": "准备变更与交接材料",
-        "handedOff": "目标、变更、检查要求已送达",
+        "requirements": [
+          "任务一开始，就能看见进度",
+          "需要时随时停，不再收到过期结果",
+          "这次的代码与进展，下次接着用"
+        ],
+        "preparing": "说清产品目标，团队把工作拆开推进",
+        "ready": "目标与已有代码接好，不必逐个分派",
+        "executor": "开发 Agent · 功能实现",
+        "implementation": "写好启动、进度与取消，把功能做出来",
+        "verifier": "独立检查 Agent",
+        "preparingHandoff": "两路工作汇合，再交给独立检查",
+        "handedOff": "代码与测试一起交接，少一次手工对齐",
         "waiting": "待检查",
-        "received": "材料已送达，等待接续",
-        "context": "交接保留任务目标、成果版本与待检查项",
-        "finding": "选择“全部”时，已有笔记没有显示",
-        "corrected": "补齐“全部”条件，返回独立检查",
-        "rechecking": "修正后重新核对检查项",
-        "verified": "检查完成，保留对应版本与记录",
-        "repository": "项目文件",
-        "projectBrief": "项目要求",
-        "source": "项目源码",
-        "criteria": "检查用例",
-        "initialVersion": "初始化代码库",
-        "feature": "标签筛选",
-        "all": "全部",
-        "work": "工作",
-        "reading": "阅读",
-        "noteTitle": "下一版，从这里开始",
-        "noteExcerpt": "记录产品想法，梳理下一步值得投入的方向。",
-        "change": "随成果一起交接",
-        "checks": ["全部笔记可见", "工作标签筛选", "无匹配时为空"],
-        "failed": "发现遗漏",
+        "received": "接着同一需求试跑，你不用在岗位间搬材料",
+        "context": "同一个目标分头推进，你少传话，团队少绕路",
+        "finding": "用户已经点了取消，结果却还在返回",
+        "corrected": "过期结果已拦住，接着检查完整流程",
+        "rechecking": "修完还要复查，再决定是否采用",
+        "verified": "代码与检查记录持续托管，下一次接着改",
+        "repository": "你的产品，继续往前",
+        "projectBrief": "这次要实现的体验",
+        "source": "沿用已有代码继续开发",
+        "criteria": "先说清怎样才算做好",
+        "initialVersion": "代码与进展随项目保留，下次少重讲背景",
+        "feature": "后台任务，体验再进一步",
+        "change": "两路工作一起向前，少等一轮串行开发",
+        "checks": ["任务能正常开始", "运行进度看得见", "取消后不再收到结果"],
+        "failed": "退回修正",
         "passed": "通过",
-        "versionPending": "检查完成后保留对应版本",
-        "versionSaved": "已保留版本与检查记录"
+        "versionPending": "问题回到开发，修正后再由你决定采用",
+        "versionSaved": "持续订阅，把每期开发额度投入下一版",
+        "executionSteps": ["开始处理", "看见进度", "随时停止"],
+        "runLabel": "这轮开发带来的体验",
+        "runTitle": "用户看得见进度，也掌握停止的主动权",
+        "runDescription": "功能实现和测试准备一起向前。你少等一轮，少做手工交接，把精力放回产品体验。",
+        "parallelExecutor": "开发 Agent · 测试准备",
+        "parallelImplementation": "同时准备关键场景测试，少等一轮写完再测"
       }
     },
     "principles": {
-      "title": "为持续开发设计\n让执行有据可查",
-      "description": "以 Rust 构建坚实底座，以原生桌面承载专注体验。Meridian 围绕项目连接工具与工作记录，让每一个值得投入的想法，都有持续向前的空间。",
+      "title": "让想法成为产品\n让开发继续向前",
+      "description": "Rust 桌面能力、隔离执行与独立检查，为多 Agent 协作建立基础。订阅持续托管项目代码与检查记录，支持范围内的维护承接后续变化，让开发精力继续用在下一版。",
       "technologiesLabel": "技术基础",
       "repositoriesLabel": "开源参考",
       "referenceRoles": {
@@ -170,12 +175,12 @@
     "locale": "en",
     "meta": {
       "title": "Meridian — AI Development Workspace",
-      "description": "Meridian brings projects, repositories and AI collaboration into one desktop workspace. Create projects, write code and review changes with context intact."
+      "description": "Meridian is an AI development workspace for solo developers and small studios. Develop in parallel with multiple agents, review independently and carry project progress into the next version."
     },
     "hero": {
       "title": "AI Development Workspace",
-      "paragraph": "A Rust-based desktop foundation, designed for project context and continuous collaboration.\nExplore how goals, code changes and review connect across one project.",
-      "headline": "Built around your entire project",
+      "paragraph": "Build your next feature with agents working in parallel.\nYou set the product direction and stay focused on what comes next.",
+      "headline": "Your next version, with an AI team behind you",
       "action": "See how it works"
     },
     "download": {
@@ -212,27 +217,27 @@
       "selectLabel": "Language"
     },
     "story": {
-      "eyebrow": "Built around development",
-      "title": "From an idea\nto work you can review",
-      "description": "Meridian brings projects, repositories and AI collaboration into one desktop workspace. Code, tasks and context stay connected, so work can pick up where you left off.",
+      "eyebrow": "For independent developers & small studios · Product concept",
+      "title": "This version’s progress\nYour next version’s head start",
+      "description": "Your subscription helps your AI team take on the next version. Build on what you’ve made, keep improving it, and put new resources toward new features.",
       "chapters": [
         {
           "id": "story-project",
           "label": "Projects & repositories",
-          "title": "A project. A place to begin.",
-          "description": "Create or import a project. Keep files, branches and changes together."
+          "title": "Hand off the work, stay in control",
+          "description": "You decide where the product goes. Your AI team connects the work ahead, with less assigning and relaying between tasks, so you can focus on product choices and refining the experience."
         },
         {
           "id": "story-code",
           "label": "Code & collaboration",
-          "title": "Shared context. Focused roles.",
-          "description": "Work toward one goal with clear roles and shared context, connecting development with review."
+          "title": "Not every task has to wait its turn",
+          "description": "Multiple agents move independent work forward in parallel, developing features while preparing tests within the same project. Spend less time waiting or manually keeping each task aligned."
         },
         {
           "id": "story-review",
           "label": "Review & delivery",
-          "title": "Review the change. Keep the evidence.",
-          "description": "Compare the diff with check results, resolve issues and retain a record of delivery."
+          "title": "Move forward with more confidence",
+          "description": "See how the feature runs and what still needs work before choosing this version. Independent checks send issues back for fixes, so the results you keep become the starting point for your next round."
         }
       ],
       "demo": {
@@ -260,62 +265,67 @@
         "label": "Concept example",
         "scenes": [
           {
-            "document": "Project brief",
-            "title": "Give notes a way to filter",
-            "artifact": "Project repository"
+            "document": "You set the goal",
+            "title": "Add background tasks users can follow and stop",
+            "artifact": "Build on what you already have"
           },
           {
-            "document": "Project task",
-            "title": "Hand off the work and context",
-            "artifact": "Result excerpt"
+            "document": "Agents working in parallel",
+            "title": "Build the feature while tests take shape",
+            "artifact": "From a request to a usable feature"
           },
           {
-            "document": "Revision record",
-            "title": "Find the gap. Fix it. Check again.",
-            "artifact": "Review results"
+            "document": "Independent review · Fixes",
+            "title": "Catch this missed case before it reaches users",
+            "artifact": "This version gives the next a head start"
           }
         ],
         "requirements": [
-          "All: keep every note",
-          "Work: match the work tag",
-          "No match: return an empty result"
+          "See progress as soon as work starts",
+          "Stop a run without getting stale results",
+          "Build on this code and progress next time"
         ],
-        "preparing": "Creating project and repository",
-        "ready": "Project ready. Brief and source kept together",
-        "executor": "Implementer",
-        "implementation": "Build the filter and record changes",
-        "verifier": "Independent reviewer",
-        "preparingHandoff": "Preparing changes and context",
-        "handedOff": "Goal, changes and review criteria delivered",
+        "preparing": "Set the product goal; the team breaks down the work",
+        "ready": "The team has the goal and code, without separate briefings",
+        "executor": "Developer agent · Feature",
+        "implementation": "Build task start, progress and cancellation",
+        "verifier": "Independent review agent",
+        "preparingHandoff": "Bring both strands together for independent review",
+        "handedOff": "Code and tests move together, with less manual coordination",
         "waiting": "Pending",
-        "received": "Delivered. Awaiting review",
-        "context": "The handoff keeps the goal, artifact revision and review criteria",
-        "finding": "Selecting All hides existing notes",
-        "corrected": "All condition restored. Ready for another review",
-        "rechecking": "Checking the revision against the criteria",
-        "verified": "Review complete. Revision and results kept together",
-        "repository": "Project files",
-        "projectBrief": "Project brief",
-        "source": "Project source",
-        "criteria": "Review cases",
-        "initialVersion": "Repository initialized",
-        "feature": "Filter by tag",
-        "all": "All",
-        "work": "Work",
-        "reading": "Reading",
-        "noteTitle": "The next version starts here",
-        "noteExcerpt": "Capture product ideas and decide what deserves attention next.",
-        "change": "Included in the handoff",
-        "checks": ["All notes remain visible", "Filter by work tag", "No match returns empty"],
-        "failed": "Issue found",
+        "received": "Check the same goal without asking you to relay the details",
+        "context": "One goal, two strands of work, less back-and-forth for you",
+        "finding": "The user cancelled, but a result still came through",
+        "corrected": "Stale results are blocked; check the full flow again",
+        "rechecking": "Recheck the fix before deciding to use it",
+        "verified": "Code and check records stay hosted, ready for your next change",
+        "repository": "Your product, moving forward",
+        "projectBrief": "The experience you want to create",
+        "source": "Build on the existing code",
+        "criteria": "Agree on what good looks like",
+        "initialVersion": "Code and progress stay with the project, with less to explain next time",
+        "feature": "A better background-task experience",
+        "change": "Two strands move forward, with less waiting in between",
+        "checks": [
+          "Task starts as expected",
+          "Progress is visible",
+          "No results after cancellation"
+        ],
+        "failed": "Back for revision",
         "passed": "Passed",
-        "versionPending": "Keep the revision when review is complete",
-        "versionSaved": "Revision and review record kept"
+        "versionPending": "Send the issue back to development; you decide after the fix",
+        "versionSaved": "Keep building each month, with your subscription’s development allowance",
+        "executionSteps": ["Start work", "See progress", "Stop anytime"],
+        "runLabel": "What this development brings to users",
+        "runTitle": "Users can see progress and stay in control",
+        "runDescription": "Feature development and test preparation move together. Spend less time waiting and coordinating, and more on the product experience.",
+        "parallelExecutor": "Developer agent · Tests",
+        "parallelImplementation": "Prepare key tests now, rather than waiting for the code"
       }
     },
     "principles": {
-      "title": "Built for ongoing work\nTraceable by design",
-      "description": "A Rust-powered foundation, shaped into a focused desktop experience. Meridian brings tools and work records together around your project, giving ideas the space to grow into lasting work.",
+      "title": "Turn ideas into products\nKeep development moving",
+      "description": "Rust desktop capabilities, isolated execution and independent checks provide a foundation for agent collaboration. Subscriptions keep project code and check records hosted, with maintenance within the supported scope helping later changes stay manageable, so development can focus on the next version.",
       "technologiesLabel": "Technology foundation",
       "repositoriesLabel": "Open-source references",
       "referenceRoles": {
@@ -393,12 +403,12 @@
     "locale": "ja",
     "meta": {
       "title": "Meridian — AI 開発ワークスペース",
-      "description": "Meridian はプロジェクト、リポジトリ、AI との協働をひとつのデスクトップワークスペースに集約。プロジェクトの作成からコードの実装、変更のレビューまで、文脈を保ちながら進められます。"
+      "description": "Meridianは個人開発者と小規模スタジオのためのAI開発ワークスペースです。複数のエージェントによる並行開発と独立した検証で、プロジェクトの進捗を次のバージョンへつなぎます。"
     },
     "hero": {
       "title": "AI 開発ワークスペース",
-      "paragraph": "Rust ベースのデスクトップ基盤で、プロジェクトの文脈と継続的な協働を支える。\n目標、コードの変更、レビューがつながる開発の流れをご覧ください。",
-      "headline": "プロジェクト全体を、ひとつにつなぐ",
+      "paragraph": "複数のエージェントが並行して開発し、構想を使える機能にするまでの仕事を分担します。\nプロダクトの方向を決めるのはあなた。次のバージョンで実現したいことに集中できます。",
+      "headline": "次のバージョンも、一人で抱え込まずに",
       "action": "使い方を見る"
     },
     "download": {
@@ -435,27 +445,27 @@
       "selectLabel": "言語"
     },
     "story": {
-      "eyebrow": "開発を軸に、仕事をつなぐ",
-      "title": "ひとつのアイデアから\n確かめられる成果へ",
-      "description": "Meridian はプロジェクト、リポジトリ、AI との協働をひとつのデスクトップワークスペースに集約。コード、タスク、文脈をつなぎ、前回の続きから作業を再開できます。",
+      "eyebrow": "個人開発者と小規模スタジオのために · 製品構想",
+      "title": "今回の成果を\n次のバージョンに生かす",
+      "description": "サブスクリプションで、次のバージョンもAIチームと分担。これまでの成果を残して磨きながら、新しい機能に力を注げます。",
       "chapters": [
         {
           "id": "story-project",
           "label": "プロジェクトとリポジトリ",
-          "title": "プロジェクトから、開発が始まる",
-          "description": "プロジェクトを作成・インポートし、ファイル、ブランチ、変更をまとめて管理。"
+          "title": "仕事を任せても、方向を決めるのはあなた",
+          "description": "何を目指すかはあなたが決め、AIチームが仕事を引き受けます。振り分けや伝達を繰り返す手間を減らし、何を作るか、どう使いやすくするかに集中できます。"
         },
         {
           "id": "story-code",
           "label": "コードと協働",
-          "title": "文脈を共有し、役割に集中する",
-          "description": "共通の目標に向けて役割を分担。文脈を保ち、実装からレビューへつなぎます。"
+          "title": "一つ終わるのを待たずに、次も進める",
+          "description": "複数のエージェントが並行して開発し、機能の実装とテストの準備を進めます。同時にできる仕事を一つずつつなぐ負担を減らし、待ち時間や手作業の調整を少なくします。"
         },
         {
           "id": "story-review",
           "label": "レビューと成果",
-          "title": "変更を確かめ、根拠を残す",
-          "description": "差分とチェック結果を照合し、問題を修正。成果を裏づける記録を残します。"
+          "title": "次の一歩に、もっと自信を",
+          "description": "動きと残る問題を見て、採用するかを判断。独立した検証で見つかった問題は開発へ戻し、残した成果を次の開発の出発点にします。"
         }
       ],
       "demo": {
@@ -483,62 +493,63 @@
         "label": "コンセプトデモ",
         "scenes": [
           {
-            "document": "プロジェクト要件",
-            "title": "ノートに、タグ絞り込みを",
-            "artifact": "プロジェクトリポジトリ"
+            "document": "あなたが目標を決める",
+            "title": "進捗が見えて、いつでも止められるバックグラウンド処理を",
+            "artifact": "これまでの成果から、次の開発へ"
           },
           {
-            "document": "プロジェクトタスク",
-            "title": "文脈ごと、次の担当へ",
-            "artifact": "成果の抜粋"
+            "document": "複数のエージェントが並行開発",
+            "title": "機能を作る間に、テストも準備",
+            "artifact": "要望を、使える機能へ"
           },
           {
-            "document": "修正記録",
-            "title": "見落としを直し、もう一度確かめる",
-            "artifact": "チェック結果"
+            "document": "独立した検証 · 修正",
+            "title": "今回の見落としを、ユーザーに届く前に修正",
+            "artifact": "今回の成果を、次のバージョンに"
           }
         ],
         "requirements": [
-          "すべて：全件のノートを表示",
-          "仕事：仕事タグのノートのみ表示",
-          "該当なし：空の結果を表示"
+          "処理が始まったら、すぐ進捗が見える",
+          "途中で止めたら、古い結果は届かない",
+          "今回のコードと進捗を、次の開発に生かす"
         ],
-        "preparing": "プロジェクトとリポジトリを作成中",
-        "ready": "作成完了。要件とソースをまとめて保持",
-        "executor": "実装担当",
-        "implementation": "絞り込みを実装し、変更を記録",
-        "verifier": "独立した検証担当",
-        "preparingHandoff": "変更内容と引き継ぎ資料を準備中",
-        "handedOff": "目標・変更内容・チェック要件を送達",
-        "waiting": "チェック待ち",
-        "received": "資料を受領。レビュー待ち",
-        "context": "目標、成果のバージョン、チェック要件を引き継ぐ",
-        "finding": "「すべて」を選ぶと、既存のノートが表示されない",
-        "corrected": "「すべて」の条件を修正。再チェックへ",
-        "rechecking": "修正内容をチェック要件と照合中",
-        "verified": "チェック完了。対応バージョンと結果を保持",
-        "repository": "プロジェクトファイル",
-        "projectBrief": "プロジェクト要件",
-        "source": "プロジェクトソース",
-        "criteria": "チェックケース",
-        "initialVersion": "リポジトリ初期化済み",
-        "feature": "タグで絞り込み",
-        "all": "すべて",
-        "work": "仕事",
-        "reading": "読書",
-        "noteTitle": "次のバージョンは、ここから",
-        "noteExcerpt": "プロダクトのアイデアを記録し、次に取り組むことを整理する。",
-        "change": "成果とともに引き継ぐ",
-        "checks": ["全件のノートを表示", "仕事タグで絞り込み", "該当なしは空の結果"],
-        "failed": "問題あり",
-        "passed": "合格",
-        "versionPending": "チェック完了後に対応バージョンを保持",
-        "versionSaved": "バージョンとチェック記録を保持済み"
+        "preparing": "作りたい体験を伝えると、チームが作業を分担",
+        "ready": "目標とコードを共有して開発へ。一人ずつ説明する手間を減らす",
+        "executor": "開発エージェント · 機能実装",
+        "implementation": "開始・進捗表示・キャンセルを実装",
+        "verifier": "独立検証エージェント",
+        "preparingHandoff": "二つの成果をまとめ、独立した検証へ",
+        "handedOff": "コードとテストを一緒に引き継ぎ、手作業での調整を減らす",
+        "waiting": "確認待ち",
+        "received": "同じ目標に沿って検証。あなたが資料を運ぶ手間を減らす",
+        "context": "一つの目標を分担して進め、あなたの伝言や調整を減らす",
+        "finding": "キャンセルしたのに、ユーザーに結果が届いてしまう",
+        "corrected": "古い結果を遮断し、一連の動作をもう一度確認",
+        "rechecking": "修正を再確認してから、採用を判断",
+        "verified": "コードと検証記録の継続ホスティングで、次の変更もこの続きから",
+        "repository": "あなたの製品を、次の一歩へ",
+        "projectBrief": "今回、実現したい体験",
+        "source": "既存のコードを生かして開発",
+        "criteria": "何を満たせば完成かを共有",
+        "initialVersion": "コードと進捗を残し、次回の説明を減らす",
+        "feature": "バックグラウンド処理を、もっと使いやすく",
+        "change": "二つの作業を並行して進め、待つ時間を減らす",
+        "checks": ["タスクが正常に始まる", "進捗を確認できる", "キャンセル後に結果が届かない"],
+        "failed": "修正へ差し戻し",
+        "passed": "通過",
+        "versionPending": "問題を開発に戻し、修正後にあなたが採用を判断",
+        "versionSaved": "サブスクリプションの開発クレジットを、毎月の新機能づくりに",
+        "executionSteps": ["処理を開始", "進捗を確認", "いつでも停止"],
+        "runLabel": "今回の開発で、使う体験が変わる",
+        "runTitle": "進捗が見えて、止めるタイミングも自分で決められる",
+        "runDescription": "機能の実装とテストの準備を同時に。待ち時間と手作業の引き継ぎを減らし、製品の使い心地に集中できます。",
+        "parallelExecutor": "開発エージェント · テスト準備",
+        "parallelImplementation": "コードの完成を待たず、主要なテストを準備"
       }
     },
     "principles": {
-      "title": "続けられる開発を\n確かめられる実行を",
-      "description": "Rust の堅実な基盤と、作業に集中できるデスクトップ体験。Meridian はプロジェクトを軸にツールと作業記録をつなぎ、アイデアを継続的な成果へ育てる環境を目指します。",
+      "title": "構想を製品へ\n開発を、その先へ",
+      "description": "Rustのデスクトップ機能、隔離された実行環境、独立した検証で、エージェントの協働を支えます。コードと検証記録を継続してホスティングし、対応範囲内の保守で後の変更にも備え、次のバージョンへつなげます。",
       "technologiesLabel": "技術基盤",
       "repositoriesLabel": "参考にしたオープンソース",
       "referenceRoles": {
@@ -564,12 +575,12 @@
     "locale": "ko",
     "meta": {
       "title": "Meridian — AI 개발 워크스페이스",
-      "description": "Meridian은 프로젝트, 저장소, AI 협업을 하나의 데스크톱 워크스페이스로 연결합니다. 프로젝트 생성부터 코드 작성과 변경 검토까지, 맥락을 유지하며 작업을 이어가세요."
+      "description": "Meridian은 개인 개발자와 소규모 스튜디오를 위한 AI 개발 작업 공간입니다. 여러 에이전트의 병렬 개발과 독립 검증으로 프로젝트 진행 상황을 다음 버전까지 이어갑니다."
     },
     "hero": {
       "title": "AI 개발 워크스페이스",
-      "paragraph": "Rust 기반 데스크톱 아키텍처로 프로젝트 맥락과 지속적인 협업을 지원합니다.\n목표부터 코드 변경, 검토까지 하나로 이어지는 개발 과정을 살펴보세요.",
-      "headline": "프로젝트 전체를 하나로 연결하다",
+      "paragraph": "여러 에이전트가 병렬로 개발하며, 아이디어를 실제로 쓸 수 있는 기능으로 만드는 일을 나눠 맡습니다.\n제품의 방향은 당신이 정하고, 다음 버전에서 만들고 싶은 것에 집중하세요.",
+      "headline": "다음 버전, 혼자 다 하지 않아도 됩니다",
       "action": "작동 방식 보기"
     },
     "download": {
@@ -606,27 +617,27 @@
       "selectLabel": "언어"
     },
     "story": {
-      "eyebrow": "개발을 중심으로 연결되는 작업",
-      "title": "하나의 아이디어에서\n검토할 수 있는 결과로",
-      "description": "Meridian은 프로젝트, 저장소, AI 협업을 하나의 데스크톱 워크스페이스로 연결합니다. 코드, 작업, 맥락이 함께 유지되어 멈췄던 지점부터 다시 시작할 수 있습니다.",
+      "eyebrow": "독립 개발자와 소규모 스튜디오를 위해 · 제품 구상",
+      "title": "이번 버전의 성과를\n다음 버전으로 이어갑니다",
+      "description": "구독으로 다음 버전도 AI 팀과 함께 만드세요. 지난번에 만든 것은 남겨 더 다듬고, 새로운 기능에 시간과 노력을 집중할 수 있습니다.",
       "chapters": [
         {
           "id": "story-project",
           "label": "프로젝트와 저장소",
-          "title": "프로젝트에서 시작하는 개발",
-          "description": "프로젝트를 만들거나 가져오고 파일, 브랜치, 변경 사항을 한곳에서 관리하세요."
+          "title": "일은 맡기고, 방향은 직접 정하세요",
+          "description": "제품이 어디로 나아갈지는 당신이 정하고, AI 팀이 할 일을 이어받습니다. 반복해서 일을 나누고 전달하는 시간을 줄여, 무엇을 만들지 결정하고 사용 경험을 다듬는 데 집중하세요."
         },
         {
           "id": "story-code",
           "label": "코드와 협업",
-          "title": "맥락을 공유하고 역할에 집중하다",
-          "description": "하나의 목표를 향해 역할을 나누고 맥락을 유지하며 개발과 검토를 연결하세요."
+          "title": "하나가 끝나길 기다리지 않아도 됩니다",
+          "description": "여러 에이전트가 병렬로 개발하며 기능 구현과 테스트 준비를 함께 진행합니다. 동시에 할 수 있는 일을 하나씩 챙길 필요 없이, 기다림과 직접 조율하는 부담을 줄일 수 있습니다."
         },
         {
           "id": "story-review",
           "label": "검토와 전달",
-          "title": "변경을 확인하고 근거를 남기다",
-          "description": "코드 차이와 점검 결과를 대조하고 문제를 수정해 결과를 뒷받침할 기록을 남기세요."
+          "title": "더 확신을 갖고, 다음으로",
+          "description": "기능의 동작과 남은 문제를 보고 이번 버전을 채택할지 결정하세요. 독립 검증에서 찾은 문제는 개발 단계로 돌려보내고, 남긴 성과는 다음 개발의 출발점으로 삼습니다."
         }
       ],
       "demo": {
@@ -654,62 +665,67 @@
         "label": "콘셉트 예제",
         "scenes": [
           {
-            "document": "프로젝트 요구 사항",
-            "title": "노트에 태그 필터 더하기",
-            "artifact": "프로젝트 저장소"
+            "document": "목표는 직접 정하세요",
+            "title": "진행 상황이 보이고, 언제든 멈출 수 있는 백그라운드 작업",
+            "artifact": "기존 성과에서 다음 버전으로"
           },
           {
-            "document": "프로젝트 작업",
-            "title": "작업과 맥락을 함께 인계하다",
-            "artifact": "결과물 일부"
+            "document": "여러 에이전트의 병렬 개발",
+            "title": "기능을 만드는 동안 테스트도 준비합니다",
+            "artifact": "요구사항을 실제로 쓸 수 있는 기능으로"
           },
           {
-            "document": "수정 기록",
-            "title": "누락을 수정하고 다시 확인하다",
-            "artifact": "점검 결과"
+            "document": "독립 검증 · 수정",
+            "title": "이번에 놓친 문제를 사용자에게 닿기 전에 수정합니다",
+            "artifact": "이번 성과를 다음 버전의 출발점으로"
           }
         ],
         "requirements": [
-          "전체: 모든 노트 표시",
-          "업무: 업무 태그만 표시",
-          "일치 항목 없음: 빈 결과 표시"
+          "작업이 시작되면 바로 진행 상황 확인",
+          "중간에 멈추면 지난 결과는 받지 않기",
+          "이번 코드와 진행 상황을 다음 개발에 활용"
         ],
-        "preparing": "프로젝트와 저장소 생성 중",
-        "ready": "프로젝트 준비 완료. 요구 사항과 소스를 함께 보관",
-        "executor": "구현 담당",
-        "implementation": "필터 구현 및 변경 사항 기록",
-        "verifier": "독립 검증 담당",
-        "preparingHandoff": "변경 사항과 인계 자료 준비 중",
-        "handedOff": "목표, 변경 사항, 점검 기준 전달 완료",
-        "waiting": "점검 대기",
-        "received": "자료 수신 완료. 검토 대기",
-        "context": "목표, 결과물 버전, 점검 기준을 함께 인계",
-        "finding": "전체를 선택하면 기존 노트가 표시되지 않음",
-        "corrected": "전체 조건 수정 완료. 독립 검토로 반환",
-        "rechecking": "수정 내용을 점검 기준과 다시 대조 중",
-        "verified": "점검 완료. 해당 버전과 결과를 함께 보관",
-        "repository": "프로젝트 파일",
-        "projectBrief": "프로젝트 요구 사항",
-        "source": "프로젝트 소스",
-        "criteria": "점검 사례",
-        "initialVersion": "저장소 초기화 완료",
-        "feature": "태그로 필터링",
-        "all": "전체",
-        "work": "업무",
-        "reading": "독서",
-        "noteTitle": "다음 버전은 여기서 시작됩니다",
-        "noteExcerpt": "제품 아이디어를 기록하고 다음으로 집중할 방향을 정리합니다.",
-        "change": "결과물과 함께 인계",
-        "checks": ["모든 노트 표시", "업무 태그 필터", "일치 항목이 없으면 빈 결과"],
-        "failed": "문제 발견",
+        "preparing": "만들고 싶은 경험을 알려주면 팀이 일을 나눕니다",
+        "ready": "목표와 기존 코드를 공유해, 일일이 설명하는 수고를 줄입니다",
+        "executor": "개발 에이전트 · 기능 구현",
+        "implementation": "시작·진행 표시·취소 기능 구현",
+        "verifier": "독립 검증 에이전트",
+        "preparingHandoff": "두 작업의 결과를 모아 독립 검증으로",
+        "handedOff": "코드와 테스트를 함께 넘겨 수작업 조율을 줄입니다",
+        "waiting": "검사 대기",
+        "received": "같은 목표로 검증해, 직접 자료를 옮기는 수고를 줄입니다",
+        "context": "하나의 목표를 나눠 진행하고, 전달과 조율의 부담은 줄입니다",
+        "finding": "사용자가 취소했는데도 결과가 계속 도착합니다",
+        "corrected": "지난 결과를 차단하고 전체 흐름을 다시 확인합니다",
+        "rechecking": "수정을 다시 확인한 뒤 채택 여부를 결정합니다",
+        "verified": "코드와 검증 기록을 계속 호스팅해, 다음 수정도 이어갑니다",
+        "repository": "제품을 다음 단계로",
+        "projectBrief": "이번에 만들고 싶은 경험",
+        "source": "기존 코드를 이어서 개발",
+        "criteria": "무엇이 완성인지 먼저 공유",
+        "initialVersion": "코드와 진행 상황을 남겨 다음 설명을 줄입니다",
+        "feature": "한층 편리해진 백그라운드 작업",
+        "change": "두 작업을 함께 진행해 기다리는 시간을 줄입니다",
+        "checks": [
+          "작업이 정상적으로 시작됨",
+          "진행 상황을 확인할 수 있음",
+          "취소 후에는 결과를 받지 않음"
+        ],
+        "failed": "수정 요청",
         "passed": "통과",
-        "versionPending": "점검 완료 후 해당 버전 보관",
-        "versionSaved": "버전과 점검 기록 보관 완료"
+        "versionPending": "문제를 개발로 돌려보내고, 수정 뒤 직접 채택을 결정하세요",
+        "versionSaved": "구독에 포함된 매월 개발 크레딧을 다음 버전에 활용하세요",
+        "executionSteps": ["작업 시작", "진행 확인", "언제든 중지"],
+        "runLabel": "이번 개발이 만드는 사용자 경험",
+        "runTitle": "진행 상황은 보이고, 멈출 시점도 직접 결정",
+        "runDescription": "기능 구현과 테스트 준비를 함께 진행합니다. 대기와 수작업 인계를 줄이고 제품 경험을 다듬는 데 집중하세요.",
+        "parallelExecutor": "개발 에이전트 · 테스트 준비",
+        "parallelImplementation": "코드 완성을 기다리지 않고 주요 테스트 준비"
       }
     },
     "principles": {
-      "title": "지속적인 개발을 위해\n실행의 근거를 남기다",
-      "description": "Rust로 구축한 견고한 기반과 작업에 집중할 수 있는 데스크톱 경험. Meridian은 프로젝트를 중심으로 도구와 작업 기록을 연결해 아이디어가 꾸준한 결과로 이어질 수 있는 환경을 지향합니다.",
+      "title": "아이디어를 제품으로\n개발은 그다음으로",
+      "description": "Rust 데스크톱 기능과 격리 실행, 독립 검증으로 에이전트 협업을 뒷받침합니다. 프로젝트 코드와 검증 기록을 계속 호스팅하고, 지원 범위 내 유지보수로 후속 변화에 대응해 다음 버전을 이어가도록 돕습니다.",
       "technologiesLabel": "기술 기반",
       "repositoriesLabel": "참고한 오픈 소스",
       "referenceRoles": {

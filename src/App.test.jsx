@@ -130,7 +130,7 @@ test('the hero leads into the product workflow and keeps downloads as a separate
   const entry = view.getByRole('link', { name: '看看如何工作' });
   expect(entry.getAttribute('href')).toBe('#showcase');
   expect(hero.contains(entry)).toBe(true);
-  expect(view.getByRole('heading', { name: '为完整项目而构建' })).toBeVisible();
+  expect(view.getByRole('heading', { name: '让下一版，不再只靠你一个人' })).toBeVisible();
   chooseLanguage(view, 'en');
   expect(view.getByRole('link', { name: 'See how it works' }).getAttribute('href')).toBe(
     '#showcase',

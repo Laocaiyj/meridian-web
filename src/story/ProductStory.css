@@ -845,6 +845,25 @@
 .sb-handoff > div > span {
   color: #d0ced8;
 }
+.sb-handoff > .sb-parallel-runs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+}
+.sb-parallel-runs > div {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+.sb-parallel-runs strong {
+  font-size: 18px;
+  line-height: 1.35;
+}
+.sb-parallel-runs span {
+  color: #d0ced8;
+  font-size: 15px;
+  line-height: 1.4;
+}
 .sb-handoff .sb-transfer {
   display: flex;
   align-items: center;
@@ -864,38 +883,33 @@
   line-height: 1.5;
   color: #c2bfcc;
 }
-.sb-filter-sample {
+.sb-run-capabilities {
   display: flex;
   gap: 28px;
   border-bottom: 1px solid #e3e1e6;
   font-size: 16px;
   color: #737079;
 }
-.sb-filter-sample > * {
+.sb-run-capabilities > * {
   padding-bottom: 9px;
 }
-.sb-filter-sample strong {
-  color: #44374f;
-  border-bottom: 2px solid #44374f;
-  font-weight: 550;
-}
-.sb-note-sample {
+.sb-run-sample {
   display: grid;
   gap: 10px;
   padding: 20px 0;
   border-bottom: 1px solid #e3e1e6;
 }
-.sb-note-sample > span {
+.sb-run-sample > span {
   font-size: 14px;
   color: #705c83;
 }
-.sb-note-sample > strong {
+.sb-run-sample > strong {
   font-size: 23px;
   line-height: 1.25;
   font-weight: 550;
   letter-spacing: -0.02em;
 }
-.sb-note-sample p {
+.sb-run-sample p {
   margin: 0;
   font-size: 16px;
   line-height: 1.5;
@@ -997,14 +1011,14 @@
     padding: 10px 0;
     font-size: 14px;
   }
-  .sb-note-sample {
+  .sb-run-sample {
     padding: 14px 0;
     gap: 7px;
   }
-  .sb-note-sample > strong {
+  .sb-run-sample > strong {
     font-size: 21px;
   }
-  .sb-note-sample p {
+  .sb-run-sample p {
     font-size: 15px;
   }
   .sb-record {
@@ -1097,6 +1111,10 @@
   }
   .section-eyebrow {
     margin-bottom: 20px;
+  }
+  .sb-handoff > .sb-parallel-runs {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
   }
   .story-track {
     padding: 0 20px;
@@ -1254,19 +1272,19 @@
     overflow: hidden;
     clip-path: inset(50%);
   }
-  .sb-filter-sample {
+  .sb-run-capabilities {
     margin-top: 14px;
     font-size: 14px;
     gap: 22px;
   }
-  .sb-note-sample {
+  .sb-run-sample {
     padding: 12px 0;
     gap: 6px;
   }
-  .sb-note-sample > strong {
+  .sb-run-sample > strong {
     font-size: 19px;
   }
-  .sb-note-sample p {
+  .sb-run-sample p {
     font-size: 14px;
   }
   .sb-change {

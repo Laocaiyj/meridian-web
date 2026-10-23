@@ -33,6 +33,50 @@ async function progress(page, value) {
     .toBeLessThanOrEqual(1);
 }
 
+test('default story markets development capabilities and follows a task API through review', async ({
+  page,
+}) => {
+  const content = require('../src/content/site.json');
+  await page.goto('./');
+  for (const language of ['zh', 'en', 'ja', 'ko']) {
+    await page.locator('#header').scrollIntoViewIfNeeded();
+    await selectLanguage(page, language);
+    const story = content[language].story;
+    await expect(page.locator('.story-capabilities')).toHaveCount(0);
+    const copy = await page.locator('.story-intro-copy').boundingBox();
+    const track = await page.locator('.story-track').boundingBox();
+    expect(track.y - (copy.y + copy.height)).toBeGreaterThanOrEqual(0);
+    expect(track.y - (copy.y + copy.height)).toBeLessThanOrEqual(96);
+    await progress(page, 0.3);
+    await expect(page.locator('.sb-repository')).toContainText('tasks.ts');
+    await expect(page.locator('.workspace-demo')).not.toContainText(
+      /notes\.ts|Notes|笔记|标签筛选/,
+    );
+    await progress(page, 0.62);
+    const parallel = page.locator('.sb-parallel-runs');
+    await expect(parallel.locator('strong')).toHaveText([
+      story.prototype.executor,
+      story.prototype.parallelExecutor,
+    ]);
+    await expect(parallel.locator('strong').nth(0)).toBeVisible();
+    await expect(parallel.locator('strong').nth(1)).toBeVisible();
+    await expect(page.locator('.sb-run-capabilities')).toContainText(
+      story.prototype.executionSteps[2],
+    );
+    await expect(page.locator('.sb-transfer [data-when="handedOff"]')).toBeVisible();
+    await progress(page, 0.7);
+    await expect(page.locator('.sb-failed')).toHaveText(story.prototype.failed);
+    await expect(page.locator('.sb-new-condition')).toBeHidden();
+    await progress(page, 1);
+    await expect(page.locator('.sb-new-condition')).toContainText('isCurrent(run)');
+    await expect(page.locator('.sb-record span[data-when="verified"]')).toHaveText(
+      story.prototype.versionSaved,
+    );
+    await progress(page, 0.7);
+    await expect(page.locator('.sb-new-condition')).toBeHidden();
+  }
+});
+
 test('one project proceeds through code, handoff, correction and delivery, and reverses', async ({
   page,
 }) => {

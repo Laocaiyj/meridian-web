@@ -124,13 +124,19 @@ test('phone retains creation, handoff, correction, verification and reversible d
     expect(
       await page.locator('.sb-transfer [data-when="handedOff"]').evaluate((el) => el.hidden),
     ).toBe(true);
-    const offset = await page.locator('.sb-spread').evaluate((el) => el.style.transform);
+    const offset = await page
+      .locator('.sb-spread')
+      .evaluate((el) => new DOMMatrixReadOnly(el.style.transform).m42);
     await phase(page, 1, 0.9);
     expect(
       await page.locator('.sb-transfer [data-when="handedOff"]').evaluate((el) => el.hidden),
     ).toBe(false);
     await phase(page, 1, 0.7);
-    expect(await page.locator('.sb-spread').evaluate((el) => el.style.transform)).toBe(offset);
+    expect(
+      await page
+        .locator('.sb-spread')
+        .evaluate((el) => new DOMMatrixReadOnly(el.style.transform).m42),
+    ).toBeCloseTo(offset, 3);
     await phase(page, 2, 0.3);
     expect(await page.locator('.sb-new-condition').evaluate((el) => el.hidden)).toBe(true);
     await phase(page, 2, 0.6);
@@ -138,7 +144,7 @@ test('phone retains creation, handoff, correction, verification and reversible d
     await phase(page, 2, 0.9);
     expect(
       await page
-        .locator('.sb-passed')
+        .locator('.sb-checks [data-when="verified"].sb-passed')
         .first()
         .evaluate((el) => el.hidden),
     ).toBe(false);

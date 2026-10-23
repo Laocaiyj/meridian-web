@@ -183,8 +183,12 @@ export function createStoryPlayback({
   };
   const observer =
     typeof ResizeObserver === 'function' ? new ResizeObserver(invalidateLayout) : null;
+  // Upstream text reflow moves the projection even when the stage size stays unchanged.
+  const introduction = boundary?.querySelector('.story-introduction');
   observer?.observe(stage);
   observer?.observe(workspace);
+  if (introduction) observer?.observe(introduction);
+  if (hero) observer?.observe(hero);
   const spread = workspace.querySelector('.sb-spread');
   if (spread) observer?.observe(spread);
   window.addEventListener('resize', invalidateLayout);
@@ -211,6 +215,8 @@ export function createStoryPlayback({
         observer?.disconnect();
         observer?.observe(stage);
         observer?.observe(workspace);
+        if (introduction) observer?.observe(introduction);
+        if (hero) observer?.observe(hero);
         const spread = workspace.querySelector('.sb-spread');
         if (spread) observer?.observe(spread);
         measureLayout();

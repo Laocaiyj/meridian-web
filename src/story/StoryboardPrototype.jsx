@@ -1,6 +1,6 @@
 import React from 'react';
 
-/** Query-gated concept study; all states are projected by the existing scroll owner. */
+/** Development concept only; the scroll owner projects fixture states, never real execution. */
 export function StoryboardPrototype({ content, chapter, workspace }) {
   const p = content.prototype;
   const scene = p.scenes[chapter];
@@ -32,9 +32,15 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
           {chapter === 1 && (
             <>
               <div className="sb-handoff">
-                <div>
-                  <strong>{p.executor}</strong>
-                  <span>{p.implementation}</span>
+                <div className="sb-parallel-runs">
+                  <div>
+                    <strong>{p.executor}</strong>
+                    <span>{p.implementation}</span>
+                  </div>
+                  <div>
+                    <strong>{p.parallelExecutor}</strong>
+                    <span>{p.parallelImplementation}</span>
+                  </div>
                 </div>
                 <div className="sb-transfer">
                   <span aria-hidden="true">↓</span>
@@ -57,10 +63,11 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
                 <p data-when="corrected">{p.corrected}</p>
                 <pre>
                   <code>
-                    <span className="sb-old-condition">− note.tags.includes(tag)</span>
+                    <span className="sb-old-condition">− publish(result);</span>
                     <span data-when="corrected" className="sb-new-condition">
-                      + tag === 'all' ||
-                      <br /> note.tags.includes(tag)
+                      + if (isCurrent(run)) {'{'}
+                      <br /> + publish(result);
+                      <br /> + {'}'}
                     </span>
                   </code>
                 </pre>
@@ -75,7 +82,7 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
         <section className="sb-artifact" aria-label={scene.artifact}>
           <div className="sb-document-line">
             <span>{scene.artifact}</span>
-            <code>{chapter === 0 ? 'main' : 'notes.ts'}</code>
+            <code>{chapter === 0 ? 'main' : 'tasks.ts'}</code>
           </div>
           {chapter === 0 && (
             <>
@@ -86,11 +93,11 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
                   <span>{p.projectBrief}</span>
                 </div>
                 <div>
-                  <code>notes.ts</code>
+                  <code>tasks.ts</code>
                   <span>{p.source}</span>
                 </div>
                 <div>
-                  <code>notes.test.ts</code>
+                  <code>tasks.test.ts</code>
                   <span>{p.criteria}</span>
                 </div>
               </div>
@@ -106,19 +113,19 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
           {chapter === 1 && (
             <>
               <h4 className="sb-artifact-title">{p.feature}</h4>
-              <div className="sb-filter-sample" aria-hidden="true">
-                <span>{p.all}</span>
-                <strong>{p.work}</strong>
-                <span>{p.reading}</span>
+              <div className="sb-run-capabilities">
+                {p.executionSteps.map((step) => (
+                  <span key={step}>{step}</span>
+                ))}
               </div>
-              <div className="sb-note-sample">
-                <span>{p.work}</span>
-                <strong>{p.noteTitle}</strong>
-                <p>{p.noteExcerpt}</p>
+              <div className="sb-run-sample">
+                <span>{p.runLabel}</span>
+                <strong>{p.runTitle}</strong>
+                <p>{p.runDescription}</p>
               </div>
               <div className="sb-change">
                 <span>{p.change}</span>
-                <code>notes.ts · notes.test.ts</code>
+                <code>tasks.ts · tasks.test.ts</code>
               </div>
               <div className="sb-record">
                 <span data-when="!handedOff">{p.preparingHandoff}</span>
@@ -133,8 +140,11 @@ export function StoryboardPrototype({ content, chapter, workspace }) {
                 {p.checks.map((check, index) => (
                   <div key={check}>
                     <span>{check}</span>
-                    <span data-when="!corrected" className={index === 0 ? 'sb-failed' : ''}>
-                      {index === 0 ? p.failed : p.waiting}
+                    <span
+                      data-when="!corrected"
+                      className={index === 2 ? 'sb-failed' : 'sb-passed'}
+                    >
+                      {index === 2 ? p.failed : p.passed}
                     </span>
                     <span data-when="corrected">
                       <span data-when="!verified">{p.waiting}</span>

@@ -212,6 +212,7 @@ test('hero primary entry opens the workflow by keyboard and keeps downloads seco
 test('current-language labels, metadata and the original local wordmark work without a toolbar', async ({
   page,
 }) => {
+  const content = require('../src/content/site.json');
   const errors = [],
     failures = [],
     external = [];
@@ -247,12 +248,12 @@ test('current-language labels, metadata and the original local wordmark work wit
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    /projects, repositories and AI collaboration/,
+    content.en.meta.description,
   );
   await selectLanguage(page, 'zh');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    /项目、代码库与 AI 协作/,
+    content.zh.meta.description,
   );
   expect(errors).toEqual([]);
   expect(failures).toEqual([]);
