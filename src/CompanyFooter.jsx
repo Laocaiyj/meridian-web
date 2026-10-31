@@ -8,22 +8,24 @@ export function CompanyFooter({ content }) {
         <div className="company-columns">
           <div className="company-about">
             <img
-              className="company-symbol"
-              src={`${process.env.PUBLIC_URL}/brand/mou-hau-symbol-reversed.svg`}
-              width="64"
-              height="64"
+              className="company-lockup"
+              src={`${process.env.PUBLIC_URL}/brand/mou-hau-lockup-en-reversed.svg`}
+              width="1334"
+              height="193"
+              loading="lazy"
               alt=""
               aria-hidden="true"
             />
             <h2
               id="company-heading"
+              className="company-brand-text"
               lang={content.name === 'Mou-Hau Logic' ? 'en' : 'zh-Hant'}
               translate="no"
             >
               {content.name}
             </h2>
             <p
-              className="company-alias"
+              className="company-alias company-brand-text"
               lang={content.alias === 'Mou-Hau Logic' ? 'en' : 'zh-Hant'}
               translate="no"
             >

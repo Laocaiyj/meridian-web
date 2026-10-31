@@ -75,44 +75,46 @@
     "exports": [
       {
         "path": "public/brand/mou-hau-lockup-en-positive.svg",
-        "sha256": "c408f92f7cd1b8b92e49773eef9897f6563d868959f8e62745f6333c6125e1f6"
+        "sha256": "dbbfa62c348ab5ff841a10608a3aceac427eed961c7cefd13815a123fdd6273a"
       },
       {
         "path": "public/brand/mou-hau-lockup-en-reversed.svg",
-        "sha256": "c362f7e0fde4557ac744a72ebdc837ebcd52076d411720dd9a727fe9fd45a22c"
+        "sha256": "47da91cffdf2f4ab62dfd5f4c8cc95b564324c490a3c05b1177c679c7b7f79a5"
       },
       {
         "path": "public/brand/mou-hau-lockup-zh-positive.svg",
-        "sha256": "ed562a016c87bbcf06c98c204d530e78eb30616c60722962b8f65d4da329274b"
+        "sha256": "09ac28dfd0e390d8eaf470e0424768c8cedd838a603abb08ef795383264c6e53"
       },
       {
         "path": "public/brand/mou-hau-lockup-zh-reversed.svg",
-        "sha256": "bedaba176fece5d54ae8a184ed62512a2f21229fe714bbef7db1dea9205893df"
+        "sha256": "d794f69c7062df3eff594f42d7fb6d761d65869e7f68ed05708546663b41b1d5"
       },
       {
         "path": "public/brand/mou-hau-symbol-positive.svg",
-        "sha256": "3f7fee367ce8323eaac0525faafb36314f4d2689617c9717e4ec1b0451ac6f6c"
+        "sha256": "a246f6af30810f2ace8c6a05680651f942a7cb618889f68f8309bbe306204e1c"
       },
       {
         "path": "public/brand/mou-hau-symbol-reversed.svg",
-        "sha256": "97c59bdc3545444fa8574979ab37cc1db702eb9b7c6c011674196642df6b7952"
+        "sha256": "a9c498660ff2cfcf7cd907d00e6ddce3338c48fc7458cf83e571daf5b14ebc0c"
       },
       {
         "path": "public/brand/mou-hau-wordmark-en-positive.svg",
-        "sha256": "4125dfcff39e1e8462bad0af44ef70c783cfce0191b8b1b2f397f9a483849e7e"
+        "sha256": "f8aee91b30e8cb11740cf1fdff71a853683e388bc24ef5ee322f75266ecd91ab"
       },
       {
         "path": "public/brand/mou-hau-wordmark-en-reversed.svg",
-        "sha256": "44ca90bc558057da7bb0469fb8eeecfc123fd79defb8be3b7425ab8f8aefddc8"
+        "sha256": "b197798d11b036954bce41a7415d3d7da95231d454e535f844d89a2f1d342f11"
       },
       {
         "path": "public/brand/mou-hau-wordmark-zh-positive.svg",
-        "sha256": "f939adfcbadfba25b2fce9b6f957bd383003d2f648b145b46966db65143d3098"
+        "sha256": "c484714faf051242c4ccfdf4f21735083b64589230b59a9c994cea8be2c34586"
       },
       {
         "path": "public/brand/mou-hau-wordmark-zh-reversed.svg",
-        "sha256": "9ab94a10ac7c48e3656ffa840bb975ab3a99636927533e1b8512a30cd7f8ee87"
+        "sha256": "2327faafe0083f0b3e4a22915b278e0f7dbbcab1ec10bfc713c3455e5c00caf9"
       }
-    ]
+    ],
+    "symbol": "MH shared-stroke ligature, user-selected B",
+    "sourceSha256": "91ace30c80bb403015561b730a43d9a9d07d1c3b8423e9889ae5c1b534b4947a"
   }
 }

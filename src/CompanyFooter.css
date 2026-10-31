@@ -109,42 +109,23 @@
 }
 
 .company-about {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  column-gap: 16px;
-  align-content: start;
+  position: relative;
+  min-width: 0;
 }
-.company-symbol {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  align-self: center;
-  width: 64px;
-  height: 64px;
+.company-lockup {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
 }
-.company-about h2,
-.company-about .company-alias {
-  grid-column: 2;
-}
-@media (max-width: 900px) {
-  .company-about {
-    grid-template-columns: 48px minmax(0, 1fr);
-    column-gap: 14px;
-  }
-  .company-symbol {
-    width: 48px;
-    height: 48px;
-  }
-}
-@media (max-width: 360px) {
-  .company-about {
-    grid-template-columns: 40px minmax(0, 1fr);
-    column-gap: 12px;
-  }
-  .company-symbol {
-    width: 40px;
-    height: 40px;
-  }
-  .company-footer h2 {
-    font-size: 20px;
-  }
+.company-about .company-brand-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

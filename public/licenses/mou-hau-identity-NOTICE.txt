@@ -1,16 +1,19 @@
-Mou-Hau Logic company identity
+Mou-Hau Logic company identity — MH ligature
 
-The graphic symbol is original geometry for Mou-Hau Logic. The Meridian product mark is separate.
-The optional Chinese and English lockups contain local vector outlines, not runtime font software.
+Company: Mou-Hau Logic / 無厚理則科技有限公司.
+The MH symbol and uppercase English lettering are vector outlines derived from the
+user-selected B artwork, then cleaned for scalable use. The source selection and
+contour geometry are recorded in the company asset manifest. These are artwork
+outlines, not a font program or a claim of a newly authored redistributable typeface.
+The Meridian product mark and its striped wordmark remain separate.
 
-Chinese wordmark source: TW-Kai.ttf / 全字庫正楷體, Version 11510.1.
+Chinese wordmark: retained TW-Kai.ttf / 全字庫正楷體 outlines, Version 11510.1.
 (c)2026 數位發展部。Font license selected: SIL Open Font License 1.1.
-Source: CNS11643 Chinese Standard Interchange Code Master Ideographs, Ministry of Digital Affairs.
+Source: CNS11643 Chinese Standard Interchange Code Master Ideographs,
+Ministry of Digital Affairs.
 https://www.cns11643.gov.tw/pageView.jsp?ID=59&SN=&la=0&lang=tw
 https://data.cns11643.gov.tw/opendata/Fonts_Kai.zip
 The complete OFL-1.1 text accompanies this record. No font binary is distributed.
 
-English wordmark source: Roboto Slab, weight 600.
-Copyright 2018 The Roboto Slab Project Authors. Apache License, Version 2.0.
-The source revision matches the existing Meridian wordmark provenance.
-See roboto-slab-LICENSE.txt. Letter spacing, outline conversion and lockup composition are adapted for Mou-Hau Logic.
+SpaceX and Cyberpunk 2077 corporate identities informed the relationship of symbol
+and lettering. Their logos, letter outlines and other brand assets are not included.
