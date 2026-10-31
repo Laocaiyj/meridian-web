@@ -27,5 +27,92 @@
       "surface": "positive"
     }
   ],
-  "generation": "Roboto Slab outlines adapted for Meridian: spacing, normalized geometry and six-cut composition."
+  "generation": "Roboto Slab outlines adapted for Meridian: spacing, normalized geometry and six-cut composition.",
+  "graphicMark": {
+    "name": "Meridian Parallel Planes",
+    "date": "2026-11-01",
+    "description": "Three parallel planes converge through one continuous return; the existing striped wordmark is preserved.",
+    "files": [
+      {
+        "path": "public/brand/meridian-symbol-positive.svg",
+        "sha256": "6da09cbc23c54f6dbc55d42630af02db044bb3d870acb602d713746fbdfbfe24"
+      },
+      {
+        "path": "public/brand/meridian-symbol-reversed.svg",
+        "sha256": "87425227cbfefd7692b66b3da62b3d3e32c0a2c1e6c59150e05f4a02a29c1a32"
+      },
+      {
+        "path": "public/brand/meridian-symbol-small.svg",
+        "sha256": "b246960a72619ec40a77d1d16cbe9149bdeaedbd1e37773772d96ee8a5a0b370"
+      },
+      {
+        "path": "public/brand/meridian-symbol-adaptive.svg",
+        "sha256": "c66347e08ab6951d62ceb43798f7f53b740bc6a79febe235d2090f1450658dcb"
+      },
+      {
+        "path": "public/brand/meridian-lockup-positive.svg",
+        "sha256": "34a7036950e915b259b8c085bb6dbb86e082fa4b8a7f0614659930ccd0185dee"
+      },
+      {
+        "path": "public/brand/meridian-lockup-reversed.svg",
+        "sha256": "38ba5e879881407956af26fd522d02e46b199bf7bdb0283181b5d28161ac3690"
+      }
+    ]
+  },
+  "appIcon": {
+    "path": "public/meridian-icon.png",
+    "size": [
+      256,
+      256
+    ],
+    "sha256": "5e5d743784ed56ac8aa269b967076a1fb00f680f67d3b1f306b18d02a799d1fa"
+  },
+  "company": {
+    "name": "Mou-Hau Logic",
+    "legalName": "無厚理則科技有限公司",
+    "role": "Company identity, separate from the Meridian product identity",
+    "notice": "public/licenses/mou-hau-identity-NOTICE.txt",
+    "exports": [
+      {
+        "path": "public/brand/mou-hau-lockup-en-positive.svg",
+        "sha256": "c408f92f7cd1b8b92e49773eef9897f6563d868959f8e62745f6333c6125e1f6"
+      },
+      {
+        "path": "public/brand/mou-hau-lockup-en-reversed.svg",
+        "sha256": "c362f7e0fde4557ac744a72ebdc837ebcd52076d411720dd9a727fe9fd45a22c"
+      },
+      {
+        "path": "public/brand/mou-hau-lockup-zh-positive.svg",
+        "sha256": "ed562a016c87bbcf06c98c204d530e78eb30616c60722962b8f65d4da329274b"
+      },
+      {
+        "path": "public/brand/mou-hau-lockup-zh-reversed.svg",
+        "sha256": "bedaba176fece5d54ae8a184ed62512a2f21229fe714bbef7db1dea9205893df"
+      },
+      {
+        "path": "public/brand/mou-hau-symbol-positive.svg",
+        "sha256": "3f7fee367ce8323eaac0525faafb36314f4d2689617c9717e4ec1b0451ac6f6c"
+      },
+      {
+        "path": "public/brand/mou-hau-symbol-reversed.svg",
+        "sha256": "97c59bdc3545444fa8574979ab37cc1db702eb9b7c6c011674196642df6b7952"
+      },
+      {
+        "path": "public/brand/mou-hau-wordmark-en-positive.svg",
+        "sha256": "4125dfcff39e1e8462bad0af44ef70c783cfce0191b8b1b2f397f9a483849e7e"
+      },
+      {
+        "path": "public/brand/mou-hau-wordmark-en-reversed.svg",
+        "sha256": "44ca90bc558057da7bb0469fb8eeecfc123fd79defb8be3b7425ab8f8aefddc8"
+      },
+      {
+        "path": "public/brand/mou-hau-wordmark-zh-positive.svg",
+        "sha256": "f939adfcbadfba25b2fce9b6f957bd383003d2f648b145b46966db65143d3098"
+      },
+      {
+        "path": "public/brand/mou-hau-wordmark-zh-reversed.svg",
+        "sha256": "9ab94a10ac7c48e3656ffa840bb975ab3a99636927533e1b8512a30cd7f8ee87"
+      }
+    ]
+  }
 }

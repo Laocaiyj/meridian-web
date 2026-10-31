@@ -7,6 +7,14 @@ export function CompanyFooter({ content }) {
       <div className="company-inner">
         <div className="company-columns">
           <div className="company-about">
+            <img
+              className="company-symbol"
+              src={`${process.env.PUBLIC_URL}/brand/mou-hau-symbol-reversed.svg`}
+              width="64"
+              height="64"
+              alt=""
+              aria-hidden="true"
+            />
             <h2
               id="company-heading"
               lang={content.name === 'Mou-Hau Logic' ? 'en' : 'zh-Hant'}

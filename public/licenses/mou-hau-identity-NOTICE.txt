@@ -1,0 +1,16 @@
+Mou-Hau Logic company identity
+
+The graphic symbol is original geometry for Mou-Hau Logic. The Meridian product mark is separate.
+The optional Chinese and English lockups contain local vector outlines, not runtime font software.
+
+Chinese wordmark source: TW-Kai.ttf / 全字庫正楷體, Version 11510.1.
+(c)2026 數位發展部。Font license selected: SIL Open Font License 1.1.
+Source: CNS11643 Chinese Standard Interchange Code Master Ideographs, Ministry of Digital Affairs.
+https://www.cns11643.gov.tw/pageView.jsp?ID=59&SN=&la=0&lang=tw
+https://data.cns11643.gov.tw/opendata/Fonts_Kai.zip
+The complete OFL-1.1 text accompanies this record. No font binary is distributed.
+
+English wordmark source: Roboto Slab, weight 600.
+Copyright 2018 The Roboto Slab Project Authors. Apache License, Version 2.0.
+The source revision matches the existing Meridian wordmark provenance.
+See roboto-slab-LICENSE.txt. Letter spacing, outline conversion and lockup composition are adapted for Mou-Hau Logic.
